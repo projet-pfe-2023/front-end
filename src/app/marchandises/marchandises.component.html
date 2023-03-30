@@ -1,0 +1,102 @@
+<div style="margin: 2%;" class="card">
+    <div class="card-header">
+        <button  class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)" >Nouveau Marchandises</button>
+    </div>
+    <div class="card-body">
+      <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="Marque">
+            <mat-header-cell *matHeaderCellDef> Marque </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Marque}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="Poids">
+            <mat-header-cell *matHeaderCellDef> Poids </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Poids}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="Volume">
+            <mat-header-cell *matHeaderCellDef> Volume </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Volume}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="Designation1">
+            <mat-header-cell *matHeaderCellDef> Designation1 </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Designation1}} </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        
+          <mat-paginator #paginator
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 20]"
+                        [showFirstLastButtons]="true">
+          </mat-paginator>
+        </div>
+          
+    </div>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+        <h2>Marchandise</h2>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form class="reg-form" [formGroup]="marchandisesform">
+        <div class="row">
+          <div class="col-md-6">
+              <label for="marque" >Marque</label>
+              <input  type="text" class="form-control" formControlName="marque" id="marque">
+              <div
+                  *ngIf="marchandisesform.get('marque')?.invalid && marchandisesform.get('marque')?.touched">
+                  <small
+                  *ngIf="marchandisesform.get('marque')?.invalid && marchandisesform.get('marque')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+              <label for="poid" >Poid</label>
+              <input  type="text" class="form-control" formControlName="poid" id="poid">
+              <div
+                  *ngIf="marchandisesform.get('poid')?.invalid && marchandisesform.get('poid')?.touched">
+                  <small
+                  *ngIf="marchandisesform.get('poid')?.invalid && marchandisesform.get('poid')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+              <label for="volume" >Volume</label>
+              <input  type="text" class="form-control" formControlName="volume" id="volume">
+              <div
+                  *ngIf="marchandisesform.get('volume')?.invalid && marchandisesform.get('volume')?.touched">
+                  <small
+                  *ngIf="marchandisesform.get('volume')?.invalid && marchandisesform.get('volume')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+              <label for="designation" >Designation</label>
+              <input  type="text" class="form-control" formControlName="designation" id="designation">
+              <div
+                  *ngIf="marchandisesform.get('designation')?.invalid && marchandisesform.get('designation')?.touched">
+                  <small
+                  *ngIf="marchandisesform.get('designation')?.invalid && marchandisesform.get('designation')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+          </div> 
+      </div>
+      </form>
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="button"  class="btn btn-primary" (click)="simpleAlert()">Enregistrer</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

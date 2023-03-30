@@ -1,0 +1,100 @@
+<div class="mat-elevation-z8">
+    <table mat-table #table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="Identifiant">
+        <th mat-header-cell *matHeaderCellDef> Identifiant. </th>
+        <td mat-cell *matCellDef="let element"> {{element.Identifiant}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.Nom}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Partenaire">
+        <th mat-header-cell *matHeaderCellDef> Partenaire </th>
+        <td mat-cell *matCellDef="let element"> {{element.Partenaire}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Utilisateur">
+        <th mat-header-cell *matHeaderCellDef> Utilisateur </th>
+        <td mat-cell *matCellDef="let element"> {{element.Utilisateur}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Details">
+        <th mat-header-cell *matHeaderCellDef> Détails </th>
+        <td mat-cell *matCellDef="let element"> <button class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)">Détails</button> </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h2 class="modal-title">Utilisateur</h2>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6" >
+          <label for="Identifiant" >Identifiant</label>
+          <input [disabled]="true" type="text" [value]="ELEMENT_DATA[0].Identifiant" class="form-control" id="Identifiant">
+        </div>
+
+        <div class="col-md-6" >
+          <label for="Nom" >Nom</label>
+          <input  type="text" [value]="ELEMENT_DATA[0].Nom" class="form-control" id="Nom">
+        </div>
+
+        <div class="col-md-6" >
+          <label for="Email" >Email</label>
+          <input  type="email"  [value]="ELEMENT_DATA[0].Email" class="form-control" id="Email">
+        </div>
+
+        <div class="col-md-6" >
+          <label for="CIN" >CIN</label>
+          <input  type="text"  [value]="ELEMENT_DATA[0].CIN" class="form-control" id="CIN">
+        </div>
+
+        <div class="col-md-6">
+          <label for="Utilisateur" >Utilisateur</label>
+          <select class="form-control" >
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="role" >Role</label>
+          <select class="form-control" >
+              <option value="importateur">Role de l'importateur</option>
+              <option value="import">Role import</option>
+              <option value="nouveau">Nouveau role</option>
+          </select>
+        </div>
+        
+
+        <div class="col-md-6" >
+          <label for="Activer" style="padding: 20px;">Activer</label>
+          <input type="checkbox" >
+        </div>
+
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="simpleAlert()" >Activer</button>
+      <button type="button" class="btn btn-primary" (click)="simpleror()">desactiver</button>
+      <button type="button" class="btn btn-primary" (click)="errorAlertBox()">Supprimer</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+  

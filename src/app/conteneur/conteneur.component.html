@@ -1,0 +1,135 @@
+<div style="margin: 2%;" class="card">
+    <div class="card-header">
+        <button  class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)" >Nouveau Conteneur</button>
+    </div>
+    <div class="card-body">
+      <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+      
+          <ng-container matColumnDef="Identification">
+            <mat-header-cell *matHeaderCellDef> Identification </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Identification}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="Type">
+            <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Type}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="Remp">
+            <mat-header-cell *matHeaderCellDef> Remp </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Remp}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="Scelles">
+            <mat-header-cell *matHeaderCellDef> Scelles </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Scelles}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Marque">
+            <mat-header-cell *matHeaderCellDef> Marque </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Marque}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Resp">
+            <mat-header-cell *matHeaderCellDef> Resp </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Resp}} </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        
+          <mat-paginator #paginator
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 20]"
+                        [showFirstLastButtons]="true">
+          </mat-paginator>
+        </div>
+          
+    </div>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+        <h2>Marchandise</h2>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form class="reg-form" [formGroup]="conteneurform">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="identification" >Identification</label>
+                <input  type="text" class="form-control" formControlName="identification" id="identification">
+                <div
+                  *ngIf="conteneurform.get('identification')?.invalid && conteneurform.get('identification')?.touched">
+                  <small
+                  *ngIf="conteneurform.get('identification')?.invalid && conteneurform.get('identification')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="type" >Type</label>
+                <input  type="text" class="form-control" formControlName="type" id="type">
+                <div
+                    *ngIf="conteneurform.get('type')?.invalid && conteneurform.get('type')?.touched">
+                    <small
+                    *ngIf="conteneurform.get('type')?.invalid && conteneurform.get('type')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="remp" >Remp</label>
+                <input  type="text" class="form-control" formControlName="remp" id="remp">
+                <div
+                    *ngIf="conteneurform.get('remp')?.invalid && conteneurform.get('remp')?.touched">
+                    <small
+                    *ngIf="conteneurform.get('remp')?.invalid && conteneurform.get('remp')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="scelles" >Scelles</label>
+                <input  type="text" class="form-control" formControlName="scelles" id="scelles">
+                <div
+                    *ngIf="conteneurform.get('scelles')?.invalid && conteneurform.get('scelles')?.touched">
+                    <small
+                    *ngIf="conteneurform.get('scelles')?.invalid && conteneurform.get('scelles')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="marque" >Marque</label>
+              <input  type="text" class="form-control" formControlName="marque" id="marque">
+              <div
+                  *ngIf="conteneurform.get('marque')?.invalid && conteneurform.get('marque')?.touched">
+                  <small
+                  *ngIf="conteneurform.get('marque')?.invalid && conteneurform.get('marque')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="resp" >Resp</label>
+              <input  type="text" class="form-control" formControlName="resp" id="resp">
+              <div
+                  *ngIf="conteneurform.get('resp')?.invalid && conteneurform.get('resp')?.touched">
+                  <small
+                  *ngIf="conteneurform.get('resp')?.invalid && conteneurform.get('resp')?.touched"
+                  class="text-danger"  > *Leave type is required</small>
+              </div>
+            </div>
+            
+        </div>
+      </form>
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="button"  class="btn btn-primary" (click)="simpleAlert()">Enregistrer</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
