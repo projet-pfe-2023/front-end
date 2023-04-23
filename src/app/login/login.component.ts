@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
         alert("Login successful");
       },
       error => {
-        console.log('Login failed');
+        console.log(error);
+        alert('login filed');
        
       }
 

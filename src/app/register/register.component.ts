@@ -13,14 +13,13 @@ import { error } from 'jquery';
 export class RegisterComponent implements OnInit{
 
   user: User = new User();
- 
-
 
   constructor(private builder: FormBuilder, private userservice:UserService){}
 
   registerform=this.builder.group({
     identifiant:this.builder.control('',Validators.compose([Validators.required,Validators.minLength(5)])),
-    name:this.builder.control('',Validators.compose([Validators.required,Validators.maxLength(20)])),
+    firstname:this.builder.control('',Validators.compose([Validators.required,Validators.maxLength(20)])),
+    lastname:this.builder.control('',Validators.compose([Validators.required,Validators.maxLength(20)])),
     password:this.builder.control('',Validators.compose([Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])),
     cpassword:this.builder.control('',Validators.compose([Validators.required,])),
     email:this.builder.control('',Validators.compose([Validators.required,Validators.email])),
@@ -39,10 +38,11 @@ export class RegisterComponent implements OnInit{
       (Response)=>{
         alert('User added successfully');
         console.log(Response);
-        this.user = { id:0 ,name: '', email: '',password:'',cin:0 };
+        this.user = { id:10 ,firstname: '',lastname: '', email: '',password:'',cin:0 };
   },
   (error) =>{
     console.error(error);
+    alert('wrong!');
   });
     
 }

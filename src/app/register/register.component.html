@@ -5,12 +5,21 @@
         </div>
         <form  #Registerform="ngForm" class="reg-form" [formGroup]="registerform" (submit)="addUser()">
             
-                <label for="name"> nom</label>
-                <input type="text" class="form-control" formControlName="name" [(ngModel)]="user.name" id="name" required>
+                <label for="lastname">nom</label>
+                <input type="text" class="form-control" formControlName="lastname" [(ngModel)]="user.lastname" id="lastname" required>
                 <div
-                    *ngIf="registerform.get('name')?.invalid && registerform.get('name')?.touched">
+                    *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched">
                     <small
-                    *ngIf="registerform.get('name')?.invalid && registerform.get('name')?.touched"
+                    *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+
+                <label for="firstname">prénom</label>
+                <input type="text" class="form-control" formControlName="firstname" [(ngModel)]="user.firstname" id="firstname" required>
+                <div
+                    *ngIf="registerform.get('firstname')?.invalid && registerform.get('firstname')?.touched">
+                    <small
+                    *ngIf="registerform.get('firstname')?.invalid && registerform.get('firstname')?.touched"
                     class="text-danger"  > *Leave type is required</small>
                 </div>
 

@@ -11,17 +11,17 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiURL = 'http://localhost:8080/api/test/User';
+  private apiURL = 'http://localhost:8080/api/test/auth';
 
   constructor(private httpClient:HttpClient) { }
 
   addUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.apiURL}/adduser`, user);
+    return this.httpClient.post<User>(this.apiURL+'/register', user);
   }
 
    login(user: User): Observable<any>{
-  
-    return this.httpClient.post<User>(`${this.apiURL}/Login`, user);
+
+    return this.httpClient.post<User>(this.apiURL+'/authenticate', user);
   }
 
 }
