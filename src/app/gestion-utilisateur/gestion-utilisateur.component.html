@@ -1,100 +1,150 @@
-<div class="mat-elevation-z8">
-    <table mat-table #table [dataSource]="dataSource">
-  
-      <ng-container matColumnDef="Identifiant">
-        <th mat-header-cell *matHeaderCellDef> Identifiant. </th>
-        <td mat-cell *matCellDef="let element"> {{element.Identifiant}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="Nom">
-        <th mat-header-cell *matHeaderCellDef> Nom </th>
-        <td mat-cell *matCellDef="let element"> {{element.Nom}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="Partenaire">
-        <th mat-header-cell *matHeaderCellDef> Partenaire </th>
-        <td mat-cell *matCellDef="let element"> {{element.Partenaire}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="Utilisateur">
-        <th mat-header-cell *matHeaderCellDef> Utilisateur </th>
-        <td mat-cell *matCellDef="let element"> {{element.Utilisateur}} </td>
-      </ng-container>
+<div class="container">
+  <div class="row flex-lg-nowrap">
+    <div class="row flex-lg-nowrap">
+      <div class="col mb-3">
+        <div class="e-panel card">
+          <div class="card-body">
+            <button class="btn btn-sm" (click)="openLg(content)">créer</button>
+            <div class="card-title">
+              <h1 class="mr-2"><span>Users</span></h1>
+            </div>
+            <div class="e-table">
+              <div class="table-responsive table-lg mt-3">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th class="max-width">Name</th>
+                      <th class="sortable">Role</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of users">
+                      <td class="text-nowrap align-middle">{{user.id}}</td>
 
-      <ng-container matColumnDef="Details">
-        <th mat-header-cell *matHeaderCellDef> Détails </th>
-        <td mat-cell *matCellDef="let element"> <button class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)">Détails</button> </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                   showFirstLastButtons
-                   aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </div>
+                      <td class="text-nowrap align-middle"><span>{{user.lastname}}</span></td>
 
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h2 class="modal-title">Utilisateur</h2>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                      <td class="text-nowrap align-middle">
+                        <ul>
+                          <li *ngFor="let authority of user.authorities">
+                            {{authority.authority}}
+                          </li>
+                        </ul>
+                      </td>
+
+                      <td class="text-nowrap align-middle">{{user.isEnabled?'Active':'InActive'}}</td>
+
+                      <td>
+                        <div class="btn-group align-top">
+                          <button class="btn btn-sm btn-outline-secondary badge" type="submit"
+                            (click)="openLg(anotherContent)" data-toggle="modal"
+                            data-target="#user-form-modal">Edit</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="modal-body">
-      <div class="row">
-        <div class="col-md-6" >
-          <label for="Identifiant" >Identifiant</label>
-          <input [disabled]="true" type="text" [value]="ELEMENT_DATA[0].Identifiant" class="form-control" id="Identifiant">
-        </div>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <form (ngSubmit)="onsubmit()">
 
-        <div class="col-md-6" >
-          <label for="Nom" >Nom</label>
-          <input  type="text" [value]="ELEMENT_DATA[0].Nom" class="form-control" id="Nom">
-        </div>
-
-        <div class="col-md-6" >
-          <label for="Email" >Email</label>
-          <input  type="email"  [value]="ELEMENT_DATA[0].Email" class="form-control" id="Email">
-        </div>
-
-        <div class="col-md-6" >
-          <label for="CIN" >CIN</label>
-          <input  type="text"  [value]="ELEMENT_DATA[0].CIN" class="form-control" id="CIN">
-        </div>
-
-        <div class="col-md-6">
-          <label for="Utilisateur" >Utilisateur</label>
-          <select class="form-control" >
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-          </select>
-        </div>
-
-        <div class="col-md-6">
-          <label for="role" >Role</label>
-          <select class="form-control" >
-              <option value="importateur">Role de l'importateur</option>
-              <option value="import">Role import</option>
-              <option value="nouveau">Nouveau role</option>
-          </select>
-        </div>
-        
-
-        <div class="col-md-6" >
-          <label for="Activer" style="padding: 20px;">Activer</label>
-          <input type="checkbox" >
-        </div>
-
+      <div class="form-group">
+        <label for="lastname">nom</label>
+        <input type="text" class="form-control" [(ngModel)]="user.lastname" [ngModelOptions]="{standalone: true}"
+          id="lastname" required>
       </div>
 
+      <div class="form-group">
+        <label for="firstname">prénom</label>
+        <input type="text" class="form-control" [(ngModel)]="user.firstname" [ngModelOptions]="{standalone: true}"
+          id="firstname" required>
+      </div>
 
+      <div class="form-group">
+        <label for="password"> Mot de passe</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="user.password"
+          [ngModelOptions]="{standalone: true}" id="password" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"
+          id="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
+      </div>
+
+      <div class="form-group">
+        <label for="cin">CIN</label>
+        <input type="text" class="form-control" [(ngModel)]="user.cin" [ngModelOptions]="{standalone: true}" id="cin"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="partenaire">Partenaire:</label>
+        <select name="partenaire" class="form-control" [(ngModel)]="user.partenaire"
+          [ngModelOptions]="{standalone: true}" id="partenaire" required>
+          <option value="">Select a partenaire</option>
+          <option value="part1">partenaire1</option>
+          <option value="part2">partenaire2</option>
+          <option value="part3">partenaire3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="user.isEnabled"
+            [ngModelOptions]="{standalone: true}" id="isEnabled">
+          <label class="form-check-label" for="isEnabled">
+            Activer
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="modal-footer">
+          <button class="btn btn-success" type="submit">valider</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #anotherContent let-modal>
+  <div class="modal-body">
+    <h1 mat-dialog-title>Update User</h1>
+    <div class="form-group">
+      <label><h4>Role</h4></label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="simpleAlert()" >Activer</button>
-      <button type="button" class="btn btn-primary" (click)="simpleror()">desactiver</button>
-      <button type="button" class="btn btn-primary" (click)="errorAlertBox()">Supprimer</button>
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <div class="form-group" style="margin-top: 10px;">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="user.isEnabled"
+          [ngModelOptions]="{standalone: true}" id="isEnabled">
+        <label class="form-check-label" for="isEnabled">
+          Activer
+        </label>
+      </div>
     </div>
-  </ng-template>
-  
+
+    <div class="row">
+      <div class="modal-footer">
+        <button class="btn btn-success" type="submit">valider</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

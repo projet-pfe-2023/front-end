@@ -24,6 +24,8 @@ import { ConnaissementComponent } from './connaissement/connaissement.component'
 import { IntervenantComponent } from './intervenant/intervenant.component';
 import { MarchandisesComponent } from './marchandises/marchandises.component';
 import { ConteneurComponent } from './conteneur/conteneur.component';
+import { CdkColumnDef } from '@angular/cdk/table';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -59,8 +61,9 @@ import { ConteneurComponent } from './conteneur/conteneur.component';
     FormsModule,
     MatPaginatorModule,
     MatTableModule,
-  ],
-  providers: [],
+    ToastrModule.forRoot()
+   ],
+  providers: [CdkColumnDef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

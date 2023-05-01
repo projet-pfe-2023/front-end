@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../user';
-import { Observable } from 'rxjs';
-
-
+import { Observable, map } from 'rxjs';
 
 
 @Injectable({
@@ -11,17 +9,24 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiURL = 'http://localhost:8080/api/test/auth';
+  private apiURL = "http://localhost:8080/api/test/User";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  addUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.apiURL+'/register', user);
+  getAllusers() {
+    return this.http.get<User[]>(this.apiURL + "/getall")
+      .pipe(
+        map(users => {
+          return users.map(user => {
+            return {
+              ...user,
+              roles: user.authorities.map(authority => authority.authority)
+            }
+          });
+        })
+      );
   }
 
-   login(user: User): Observable<any>{
 
-    return this.httpClient.post<User>(this.apiURL+'/authenticate', user);
-  }
-
+  
 }

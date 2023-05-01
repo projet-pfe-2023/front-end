@@ -14,12 +14,14 @@ import {ConnaissementComponent} from './connaissement/connaissement.component';
 import {IntervenantComponent} from './intervenant/intervenant.component';
 import {MarchandisesComponent} from './marchandises/marchandises.component';
 import {ConteneurComponent} from './conteneur/conteneur.component'
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  {path:'',component:LoginComponent},
+  {path:'',component:LoginComponent,canActivate:[AuthGuard]},
+  {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'accueil',component:AccueilComponent},
-  {path:'administration',component:AdministrationComponent,
+  {path:'administration',component:AdministrationComponent,canActivate:[AuthGuard],
   children:[
     {path:'gestion-utilisateur',component:GestionUtilisateurComponent},
     {path:'gestion-role',component:GestionRoleComponent},

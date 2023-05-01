@@ -1,0 +1,26 @@
+button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005D6E;
+}
+
+a.nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+a.nav-link:hover {
+    color: white;
+    text-decoration: underline;
+}
