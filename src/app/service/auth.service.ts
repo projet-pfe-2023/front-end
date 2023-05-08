@@ -15,11 +15,7 @@ export class AuthService  {
   constructor(private http:HttpClient) { }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiURL+"/register", user)
-    .pipe(
-      tap(res => this.saveToken(res.token))
-    );
-    
+    return this.http.post<User>(this.apiURL+"/register", user) 
   }
 
    login(user: User): Observable<any>{
@@ -40,8 +36,19 @@ export class AuthService  {
     isLoggedIn(): boolean {
       return this.getToken() !== null;
     }
-  
-    logout() {
+    clearToken(): void {
       sessionStorage.removeItem(this.TOKEN_KEY);
     }
+    
+  
+    logout() {
+      const url = 'http://localhost:8080/api/test/auth/logout';
+      const options = {
+        withCredentials: true  // add this line
+      };
+      return this.http.post(url, null, options);
+    }
+    
+    
+    
 }

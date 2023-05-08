@@ -1,4 +1,3 @@
-
 export class User {
     id!: number;
     firstname!: string;
@@ -7,9 +6,9 @@ export class User {
     password!: string;
     cin!: number;
     partenaire!:string;
-    authorities!: Authority[];
+    authorities: Authority[] = [];
     token!:string;
-    isEnabled!:boolean;
+    isEnabled!:boolean ;
   }
   export interface Authority {
     authority: string;

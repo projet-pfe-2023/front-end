@@ -26,9 +26,7 @@ import { MarchandisesComponent } from './marchandises/marchandises.component';
 import { ConteneurComponent } from './conteneur/conteneur.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { ToastrModule } from 'ngx-toastr';
-
-
-
+import { CreateUserComponent } from './create-user/create-user.component';
 
 
 
@@ -49,6 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     IntervenantComponent,
     MarchandisesComponent,
     ConteneurComponent,
+    CreateUserComponent,
 
   ],
   imports: [

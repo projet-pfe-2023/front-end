@@ -7,7 +7,7 @@
 
             <label for="lastname">nom</label>
             <input type="text" class="form-control" formControlName="lastname" [(ngModel)]="user.lastname" id="lastname"
-                required>
+                 required>
             <div *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched">
                 <small *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched"
                     class="text-danger"> *Leave type is required</small>

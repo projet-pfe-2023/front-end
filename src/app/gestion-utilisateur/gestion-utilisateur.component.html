@@ -4,7 +4,9 @@
       <div class="col mb-3">
         <div class="e-panel card">
           <div class="card-body">
-            <button class="btn btn-sm" (click)="openLg(content)">créer</button>
+            <button style="margin-left: 90%;" (click)="onCreate()">
+             <span>+add</span>
+            </button>
             <div class="card-title">
               <h1 class="mr-2"><span>Users</span></h1>
             </div>
@@ -34,12 +36,15 @@
                         </ul>
                       </td>
 
-                      <td class="text-nowrap align-middle">{{user.isEnabled?'Active':'InActive'}}</td>
-
+                      <td class="text-nowrap align-middle">
+                        <span *ngIf="user.isEnabled" class="status-enabled">Enabled</span>
+                        <span *ngIf="!user.isEnabled" class="status-disabled">Disabled</span>
+                      </td>
+                      
                       <td>
                         <div class="btn-group align-top">
-                          <button class="btn btn-sm btn-outline-secondary badge" type="submit"
-                            (click)="openLg(anotherContent)" data-toggle="modal"
+                          <button type="button" class="btn btn-primary"
+                            (click)="openLg(anotherContent, user)" data-toggle="modal"
                             data-target="#user-form-modal">Edit</button>
                         </div>
                       </td>
@@ -54,54 +59,24 @@
     </div>
   </div>
 </div>
-<ng-template #content let-modal>
-  <div class="modal-body">
-    <form (ngSubmit)="onsubmit()">
 
-      <div class="form-group">
-        <label for="lastname">nom</label>
-        <input type="text" class="form-control" [(ngModel)]="user.lastname" [ngModelOptions]="{standalone: true}"
-          id="lastname" required>
-      </div>
-
-      <div class="form-group">
-        <label for="firstname">prénom</label>
-        <input type="text" class="form-control" [(ngModel)]="user.firstname" [ngModelOptions]="{standalone: true}"
-          id="firstname" required>
-      </div>
-
-      <div class="form-group">
-        <label for="password"> Mot de passe</label>
-        <input type="password" class="form-control" name="password" [(ngModel)]="user.password"
-          [ngModelOptions]="{standalone: true}" id="password" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"
-          id="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
-      </div>
-
-      <div class="form-group">
-        <label for="cin">CIN</label>
-        <input type="text" class="form-control" [(ngModel)]="user.cin" [ngModelOptions]="{standalone: true}" id="cin"
-          required>
-      </div>
-
-      <div class="form-group">
-        <label for="partenaire">Partenaire:</label>
-        <select name="partenaire" class="form-control" [(ngModel)]="user.partenaire"
-          [ngModelOptions]="{standalone: true}" id="partenaire" required>
-          <option value="">Select a partenaire</option>
-          <option value="part1">partenaire1</option>
-          <option value="part2">partenaire2</option>
-          <option value="part3">partenaire3</option>
+<ng-template #anotherContent let-modal>
+  <div class="modal-body" >
+    <h1 mat-dialog-title>Update User</h1>
+    <div class="form-group">
+      <label>
+        <h4>Role</h4>
+      </label>
+      <div>
+        <select class="form-select" aria-label="Default select example"  id="role" [(ngModel)]="newRole">
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
         </select>
       </div>
-
-      <div class="form-group">
+      
+      <div class="form-group" style="margin-top: 10px;">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" [(ngModel)]="user.isEnabled"
-            [ngModelOptions]="{standalone: true}" id="isEnabled">
+            [ngModelOptions]="{standalone: true}" id="isEnabled" [checked]="user.isEnabled">
           <label class="form-check-label" for="isEnabled">
             Activer
           </label>
@@ -110,40 +85,9 @@
 
       <div class="row">
         <div class="modal-footer">
-          <button class="btn btn-success" type="submit">valider</button>
+          <button class="btn btn-light"  type="submit" (click)="updateRole(user)">valider</button>
           <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
         </div>
-      </div>
-    </form>
-  </div>
-</ng-template>
-
-<ng-template #anotherContent let-modal>
-  <div class="modal-body">
-    <h1 mat-dialog-title>Update User</h1>
-    <div class="form-group">
-      <label><h4>Role</h4></label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-    </div>
-    <div class="form-group" style="margin-top: 10px;">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" [(ngModel)]="user.isEnabled"
-          [ngModelOptions]="{standalone: true}" id="isEnabled">
-        <label class="form-check-label" for="isEnabled">
-          Activer
-        </label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="modal-footer">
-        <button class="btn btn-success" type="submit">valider</button>
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
       </div>
     </div>
   </div>

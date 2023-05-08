@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../user';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -12,6 +12,21 @@ export class UserService {
   private apiURL = "http://localhost:8080/api/test/User";
 
   constructor(private http: HttpClient) { }
+
+  updateUserRole(id: number, newRole: string): Observable<User> {
+    const url = this.apiURL + "/users/" + id + "/role";
+    const request = { newRole };
+    return this.http.put<User>(url, request);
+  }
+  
+  findUserById(id: number): Observable<User | null>{
+    if (isNaN(id) || id < 1) {
+      console.log('Invalid user ID');
+      return of(null);
+    }
+    const url = this.apiURL + "/getuser/" +id; 
+    return this.http.get<User>(url);
+  }
 
   getAllusers() {
     return this.http.get<User[]>(this.apiURL + "/getall")
@@ -26,7 +41,6 @@ export class UserService {
         })
       );
   }
-
 
   
 }

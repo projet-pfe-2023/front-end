@@ -6,14 +6,13 @@
         <div class="card1">
           <div class="card-header">
             <select style="width: 30%;" name="" id="">
-              <option  value="">Sélectionner une procedure</option>
+              <option value="">Sélectionner une procedure</option>
             </select>
             <select style="margin-left: 10%;width: 30%" name="" id="">
-              <option  value="">Sélectionner une procedure</option>
+              <option value="">Sélectionner une procedure</option>
             </select>
-            <button style="margin-left:  10%;" type="button" class="btn btn-info">
-              Accéder au formulaire</button
-            ><br />
+            <button style="margin-left:  10%;" type="button" class="btn btn-dark">
+              Accéder au formulaire</button><br />
             <h5 style="text-align: center; margin-top: 8px;">Liste de procedure</h5>
           </div>
           <div class="card-body">
@@ -84,7 +83,7 @@
                       </div>
 
                     </div>
-                    
+
                   </div>
                 </div>
               </div>
@@ -99,30 +98,28 @@
   </div>
   <div class="col-sm-2">
     <div class="cards">
-  <div class="card text-white bg-dark mb-3" style="max-width: 18rem">
-    <div class="card-header">bienvenu</div>
-    <div class="card-body">
-      <a href="">Déconnexion</a><br />
-      <a href="">Modefier mot de passe</a><br />
-      <a href="administration/gestion-utilisateur">Administration</a>
-    </div>
-  </div>
-  <div class="card text-white bg-dark mb-3" style="max-width: 18rem">
-    <div class="card-header">Rechercher</div>
-    <div class="card-body">
-      <label for="numero-dossier">Numéro Dossier</label>
-      <input type="text" />
-      <label for="date-envoi">Date Envoie</label>
-      <input type="text" />
-      <label for="etat-dossier">Etat de Dossier</label>
-      <select name="etat-dossier" id="etat-dossier">
-        <option value="etat">tous</option></select
-      ><br />
-      <button type="button" class="btn btn-primary">Rechercher</button>
-    </div>
-  </div>
+      <div class="card text-white bg-orange  mb-3" style="max-width: 18rem">
+        <div class="card-header">bienvenu</div>
+        <div class="card-body">
+          <a href="#" class="btn btn-secondary btn-lg active"role="button" aria-pressed="true">Déconnexion</a><br />
+          <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" role="button" 
+          aria-pressed="true"[routerLink]="['/administration/gestion-utilisateur', user.id]" style="margin-top: 2px;">Administration</a>
+        </div>
+      </div>
+      <div class="card text-dark bg-orange  mb-3" style="max-width: 18rem">
+        <div class="card-header">Rechercher</div>
+        <div class="card-body">
+          <label for="numero-dossier">Numéro Dossier</label>
+          <input type="text" />
+          <label for="date-envoi">Date Envoie</label>
+          <input type="text" />
+          <label for="etat-dossier">Etat de Dossier</label>
+          <select name="etat-dossier" id="etat-dossier">
+            <option value="etat">tous</option>
+          </select><br />
+          <button button type="button" class="btn btn-outline-success">Rechercher</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-

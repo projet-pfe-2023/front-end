@@ -15,17 +15,20 @@ import {IntervenantComponent} from './intervenant/intervenant.component';
 import {MarchandisesComponent} from './marchandises/marchandises.component';
 import {ConteneurComponent} from './conteneur/conteneur.component'
 import { AuthGuard } from './guard/auth.guard';
+import { CreateUserComponent } from './create-user/create-user.component';
+
 
 const routes: Routes = [
-  {path:'',component:LoginComponent,canActivate:[AuthGuard]},
+  {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'accueil',component:AccueilComponent},
+  {path:'accueil',component:AccueilComponent}, 
   {path:'administration',component:AdministrationComponent,canActivate:[AuthGuard],
   children:[
-    {path:'gestion-utilisateur',component:GestionUtilisateurComponent},
+    {path:'gestion-utilisateur/:id',component:GestionUtilisateurComponent},
     {path:'gestion-role',component:GestionRoleComponent},
-    {path:'gestion-formulaire',component:GestionFormulaireComponent}
+    {path:'gestion-formulaire',component:GestionFormulaireComponent},
+    {path: 'create-user', component:CreateUserComponent},  
   ]},
   {path:'accueil-consignateur',component:AccueilConsignateurComponent},
   {path:'administration-consignateur',component:AdministrationConsignateurComponent,
