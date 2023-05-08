@@ -1,57 +1,10 @@
 .row{
     padding: 2%;
 }
-/* Style for the card header */
-.card-header {
-    background-color: #ff9900;
-    color: #fff;
+a {
+    text-decoration: none;
+    color: blue;
   }
-  
-  /* Style for the select boxes */
-  select {
-    width: 30%;
-  }
-  
-  /* Style for the button */
-  .btn-info {
-    background-color: #17a2b8;
-    color: #fff;
-  }
-  
-  /* Style for the heading */
-  h5 {
-    text-align: center;
-    margin-top: 8px;
-  }
-  
-  /* Style for the main card */
-  .card {
-    margin-top: 20px;
-  }
-  
-  /* Style for the card body */
-  .card-body {
-    padding: 20px;
-  }
-  
-  /* Style for the card */
-  .card1 {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
-  /* Style for the footer */
-  .card-footer {
-    background-color: #ff9900;
-    color: #fff;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  /* Style for the column */
-  .col-sm-6 {
-    margin-top: 20px;
-  }
-  
+a:hover{
+    color: aliceblue;
+}
