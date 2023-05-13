@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../user';
 import { Observable, pipe } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService  {
   private readonly TOKEN_KEY = 'token';
   private apiURL = "http://localhost:8080/api/test/auth";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router: Router) { }
 
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiURL+"/register", user) 
@@ -26,27 +27,22 @@ export class AuthService  {
    }
 
    private saveToken(token: string) {
-    sessionStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
     getToken(): string {
-      return sessionStorage.getItem(this.TOKEN_KEY) ?? '';
+      return localStorage.getItem(this.TOKEN_KEY) ?? '';
     }
   
     isLoggedIn(): boolean {
-      return this.getToken() !== null;
+      return !!localStorage.getItem('token')
     }
-    clearToken(): void {
-      sessionStorage.removeItem(this.TOKEN_KEY);
-    }
+   
     
   
     logout() {
-      const url = 'http://localhost:8080/api/test/auth/logout';
-      const options = {
-        withCredentials: true  // add this line
-      };
-      return this.http.post(url, null, options);
+        localStorage.removeItem('token')
+        this.router.navigate(['/login'])
     }
     
     

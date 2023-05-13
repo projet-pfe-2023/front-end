@@ -4,15 +4,8 @@
       <h5 class="card-header">Importateur Guce</h5>
       <div class="card-body">
         <div class="card1">
-          <div class="card-header">
-            <select style="width: 30%;" name="" id="">
-              <option value="">Sélectionner une procedure</option>
-            </select>
-            <select style="margin-left: 10%;width: 30%" name="" id="">
-              <option value="">Sélectionner une procedure</option>
-            </select>
-            <button style="margin-left:  10%;" type="button" class="btn btn-dark">
-              Accéder au formulaire</button><br />
+          <div class="card-header" style="background-color: blue;">
+            
             <h5 style="text-align: center; margin-top: 8px;">Liste de procedure</h5>
           </div>
           <div class="card-body">
@@ -20,7 +13,7 @@
               <div class="col-sm-6">
 
                 <div class="card">
-                  <div class="card-header">Inscreption au fichier des Importateurs Exportateur</div>
+                  <div class="card-header"style="background-color: blue;">Inscreption au fichier des Importateurs Exportateur</div>
                   <div class="card-body">
                     <div class="row">
 
@@ -66,7 +59,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="card">
-                  <div class="card-header">Procedur d'importation des véhicules d'occasions</div>
+                  <div class="card-header" style="background-color: blue;">Procedur d'importation des véhicules d'occasions</div>
                   <div class="card-body">
                     <div class="row">
 
@@ -91,33 +84,19 @@
           </div>
         </div>
       </div>
-      <div class="card-footer">
-        <h5 style="text-align: center;">Liste de procedure</h5>
+      <div class="card-footer" style="background-color: blue;">
+        <h5 style="text-align: center">Liste de procedure</h5>
       </div>
     </div>
   </div>
   <div class="col-sm-2">
     <div class="cards">
       <div class="card text-white bg-orange  mb-3" style="max-width: 18rem">
-        <div class="card-header">bienvenu</div>
+        <div class="card-header" style="background-color: blue;">bienvenu</div>
         <div class="card-body">
           <a href="#" class="btn btn-secondary btn-lg active"role="button" aria-pressed="true">Déconnexion</a><br />
-          <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" role="button" 
-          aria-pressed="true"[routerLink]="['/administration/gestion-utilisateur', user.id]" style="margin-top: 2px;">Administration</a>
-        </div>
-      </div>
-      <div class="card text-dark bg-orange  mb-3" style="max-width: 18rem">
-        <div class="card-header">Rechercher</div>
-        <div class="card-body">
-          <label for="numero-dossier">Numéro Dossier</label>
-          <input type="text" />
-          <label for="date-envoi">Date Envoie</label>
-          <input type="text" />
-          <label for="etat-dossier">Etat de Dossier</label>
-          <select name="etat-dossier" id="etat-dossier">
-            <option value="etat">tous</option>
-          </select><br />
-          <button button type="button" class="btn btn-outline-success">Rechercher</button>
+          <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" 
+          [routerLink]="['/administration/gestion-utilisateur', user.id]" style="margin-top: 2px;">Administration</a>
         </div>
       </div>
     </div>

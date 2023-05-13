@@ -14,7 +14,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import { GestionUtilisateurComponent } from './gestion-utilisateur/gestion-utilisateur.component';
 import { GestionRoleComponent } from './gestion-role/gestion-role.component';
-import { GestionFormulaireComponent } from './gestion-formulaire/gestion-formulaire.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { AccueilConsignateurComponent } from './accueil-consignateur/accueil-consignateur.component';
@@ -39,7 +38,6 @@ import { CreateUserComponent } from './create-user/create-user.component';
     AdministrationComponent,
     GestionUtilisateurComponent,
     GestionRoleComponent,
-    GestionFormulaireComponent,
     AccueilConsignateurComponent,
     AdministrationConsignateurComponent,
     FormManifestComponent,

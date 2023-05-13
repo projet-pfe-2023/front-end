@@ -16,49 +16,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./gestion-utilisateur.component.css']
 })
 export class GestionUtilisateurComponent implements OnInit {
-  content: any;
-  anotherContent: any;
-  roles = ['USER', 'ADMIN'];
-  newRole = '';
+ 
   id!:number;
 
 
   constructor(private userservice: UserService, private authService: AuthService, 
     private modalService: NgbModal, private router: Router, private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef,private toastr: ToastrService) {
-    this.content = 'Content for first button';
-    this.anotherContent = 'Content for second button';
-  }
+    private cdr: ChangeDetectorRef,private toastr: ToastrService) {}
   users: User[] = [];
   user: User = new User();
 
   ngOnInit(): void {
     this.getusers();
   }
-  updateRole(user: any) {
-    this.userservice.updateUserRole(user.id, this.newRole).subscribe(res => {
-      console.log(res);
-      user.isEnabled = true;
-      this.getusers();
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        confirmButtonColor: '#25377A',
-        title: "Félicitation! Votre Role est modifier.",
-        showConfirmButton: true,
-      })
-    },err => {
-      console.log(err);
-      this.toastr.error("Failed to update role!");
-    });
-   
-  }
+ 
   
-
-  openLg(anotherContent: any, user: any) {
-    this.modalService.open(anotherContent, { size: 'lg' });
-    this.user = user;
-  }
 
 
   private getusers(): void {

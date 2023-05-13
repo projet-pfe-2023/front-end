@@ -15,31 +15,16 @@ import { User } from '../user';
   styleUrls: ['./administration.component.css'],
 })
 export class AdministrationComponent  {
-
   user: User = new User();
+
   constructor(private authService: AuthService,private router: Router){}
 
-  isLoggout(){
-    this.authService.logout().subscribe(
-      data =>{
-        console.log(data);
-        this.authService.clearToken();
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          confirmButtonColor: '#25377A',
-          title: "please connect again.",
-          showConfirmButton: true,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate(['/login']);
-          }
-        });
-      },
-      (error) =>{
-        console.log(error);
-      }
-      );
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
+
+  logout(): void {
+    this.authService.logout();
+  }
 } 

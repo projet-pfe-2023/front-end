@@ -5,7 +5,6 @@ import {RegisterComponent} from './register/register.component';
 import {AccueilComponent} from './accueil/accueil.component';
 import {AdministrationComponent} from './administration/administration.component';
 import {GestionUtilisateurComponent} from './gestion-utilisateur/gestion-utilisateur.component';
-import {GestionFormulaireComponent} from './gestion-formulaire/gestion-formulaire.component';
 import {GestionRoleComponent} from './gestion-role/gestion-role.component';
 import {AccueilConsignateurComponent} from './accueil-consignateur/accueil-consignateur.component';
 import { AdministrationConsignateurComponent } from './administration-consignateur/administration-consignateur.component';
@@ -27,7 +26,6 @@ const routes: Routes = [
   children:[
     {path:'gestion-utilisateur/:id',component:GestionUtilisateurComponent},
     {path:'gestion-role',component:GestionRoleComponent},
-    {path:'gestion-formulaire',component:GestionFormulaireComponent},
     {path: 'create-user', component:CreateUserComponent},  
   ]},
   {path:'accueil-consignateur',component:AccueilConsignateurComponent},

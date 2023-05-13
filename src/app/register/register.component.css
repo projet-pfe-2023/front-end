@@ -1,40 +1,70 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-.head{
+.head {
     text-align: center;
     text-transform: uppercase;
     margin: 10px 0;
 }
-input{
+
+
+body {
+    
+    background: linear-gradient(90deg, rgb(41, 87, 214) 0%, rgb(39, 6, 138) 50%);
+    font-family: "Poppins";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120%;
+}
+
+.form {
+    margin-top: -1px;
+    background: #FFFFFF;
+    width: 90%;
+    padding: 45px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 15px;
+}
+
+.form input {
+    outline: 0;
+    background: #f2f2f2;
     width: 100%;
-    height: 30px;
-    outline: none;
-    margin: 4px 0;
-    border-radius: 4px;
-    padding: 4px;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 15px;
 }
-.sqeuletee{
-    width: 80%;
-    margin: auto;
-}
-a[routerLink="/login"] {
-    margin-top: 10px;
-    position: absolute;
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
+
+.form button {
     text-transform: uppercase;
+    outline: 0;
+    background: #3324be;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 16px;
+    border-radius: 15px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: #2957d6;
+}
+
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.form .message a {
+    color: #3324be;
     text-decoration: none;
-    color: #fff;
-    background-color: #2196f3;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  a[routerLink="/login"]:hover {
-    background-color: #1976d2;
-  }
-  
+    font-size: 14px;
+}

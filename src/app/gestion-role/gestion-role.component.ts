@@ -1,8 +1,11 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { ChangeDetectorRef, Component, OnInit} from '@angular/core';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { UserService } from '../service/user.service';
+import { AuthService } from '../service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Authority, User } from '../user';
 
 
 @Component({
@@ -10,92 +13,77 @@ import Swal from 'sweetalert2';
   templateUrl: './gestion-role.component.html',
   styleUrls: ['./gestion-role.component.css']
 })
-export class GestionRoleComponent implements AfterViewInit {
-  displayedColumns: string[] = ['Code', 'Nom', 'Partenaire', 'Nombre','Details'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  closeResult: string|any;
-  ELEMENT_DATA = ELEMENT_DATA;
+export class GestionRoleComponent implements OnInit {
+  content: any;
+  roles = ['USER', 'ADMIN'];
+  newRole = '';
+  id!:number;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator  ;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+ 
+  constructor(private userservice: UserService, private authService: AuthService, 
+    private modalService: NgbModal, private router: Router, private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef) {}
+  users: User[] = [];
+  user: User = new User();
+
+  ngOnInit(): void {
+    this.getusers();
   }
 
-  constructor(private modalService: NgbModal) {}
-
-  openLg(content:any) {
-    this.modalService.open(content, { size: 'lg' });
+  
+  openLg(Content: any, user: any) {
+    this.modalService.open(Content, { size: 'lg' });
+    this.user = user;
   }
 
-  simpleAlert(){
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Activer avec succés',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  }
 
-  simpleror(){
-    Swal.fire({
-      position: 'top-end',
-      icon: 'warning',
-      title: 'desactiver avec succés',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  }
-
-  errorAlertBox() {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+  private getusers(): void {
+    this.userservice.getAllusers().subscribe(
+      (users: User[]) => {
+        // Map the returned array of users to the User interface
+        this.users = users.map((user: User) => ({
+          id: user.id,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          password: user.password,
+          cin: user.cin,
+          partenaire: user.partenaire,
+          token: user.token,
+          isEnabled: user.isEnabled,
+          authorities: user.authorities.map((authority: Authority) => ({
+            authority: authority.authority
+          }))
+        }));
+        console.log(this.users);
       },
-      buttonsStyling: false
-    })
-    
-    swalWithBootstrapButtons.fire({
-      title: 'Tu es sur?',
-      text: "Vous ne pourrez pas inverser cela!!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Oui!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire(
-          'Supprimé!',
-          'Démande supprimer.',
-          'success'
-        )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Annulé',
-          'Votre fichier est en sécurité:)',
-          'error'
-        )
+      (error: any) => {
+        console.error('Failed to fetch users', error);
       }
-    })
-    
+    );
+  }
 
-}}
+  updateRole(user: any) {
+    this.userservice.updateUserRole(user.id, this.newRole).subscribe(res => {
+      console.log(res);
+      user.isEnabled = true;
+      this.getusers();
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        confirmButtonColor: '#25377A',
+        title: "Félicitation! Votre Role est modifier.",
+        showConfirmButton: true,
+      })
+    },err => {
+      console.log(err);
+      
+    });
+   
+  } 
 
-
-export interface PeriodicElement {
-  Code: string;
-  Nom: string;
-  Partenaire: string;
-  Nombre: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {Code: 'aaaa', Nom: 'Hydrogen', Partenaire: 'aaaa', Nombre: 'H'},
-];
+
 
