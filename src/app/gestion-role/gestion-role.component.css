@@ -159,6 +159,7 @@ table {
     display: inline-block;
     position: relative;
     transition: 0.5s;
+    color: #fff;
    }
    
    button span:after {

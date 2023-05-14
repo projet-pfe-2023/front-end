@@ -6,6 +6,7 @@ import { UserService } from '../service/user.service';
 import { AuthService } from '../service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Authority, User } from '../user';
+import { error } from 'jquery';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class GestionRoleComponent implements OnInit {
   roles = ['USER', 'ADMIN'];
   newRole = '';
   id!:number;
-
+  isEnabled!:boolean;
 
  
   constructor(private userservice: UserService, private authService: AuthService, 
@@ -29,6 +30,7 @@ export class GestionRoleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getusers();
+    const isEnabled = localStorage.getItem('isEnabled');
   }
 
   
@@ -63,6 +65,24 @@ export class GestionRoleComponent implements OnInit {
       }
     );
   }
+
+  updateActivationStatus(user: any) {
+    this.userservice.activateUser(user.id).subscribe(
+      (data: any) => {
+        console.log('User account activated successfully', data);
+        if (data && data.hasOwnProperty('isEnabled')) {
+          localStorage.setItem('isEnabled', data['isEnabled'].toString());
+        }
+        this.getusers(); // Refresh the users array
+        this.cdr.detectChanges(); // Trigger change detection
+      },
+      (error) => {
+        console.error('Failed to activate user account:', error);
+      }
+    );
+  }
+  
+  
 
   updateRole(user: any) {
     this.userservice.updateUserRole(user.id, this.newRole).subscribe(res => {

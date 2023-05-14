@@ -40,7 +40,7 @@ th {
 
 .btn-outline-secondary:hover {
   background-color: #3d87c7;
-  color: #fff;
+  color: #bbb8b8;
 }
 
 .badge {
@@ -159,6 +159,7 @@ button {
   display: inline-block;
   position: relative;
   transition: 0.5s;
+  color: #fff;
  }
  
  button span:after {
@@ -178,3 +179,10 @@ button {
   opacity: 1;
   right: 0;
  }
+ .status-enabled {
+  color: green;
+}
+
+.status-disabled {
+  color: red;
+}

@@ -5,7 +5,7 @@
         <div class="e-panel card">
           <div class="card-body">
             <button style="margin-left: 90%;" (click)="onCreate()">
-             <span>+add</span>
+             <span>create</span>
             </button>
             <div class="card-title">
               <h1 class="mr-2"><span>Users</span></h1>
@@ -19,12 +19,12 @@
                       <th class="max-width">Name</th>
                       <th class="sortable">Role</th>
                       <th>Status</th>
-                      <th></th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let user of users">
-                      <td class="text-nowrap align-middle">{{user.id}}</td>
+                      <td class="text-nowrap align-middle"><span>{{user.id}}</span></td>
 
                       <td class="text-nowrap align-middle"><span>{{user.lastname}}</span></td>
 
@@ -36,9 +36,11 @@
                         </ul>
                       </td>
 
-                      <td class="text-nowrap align-middle">
-                        <span *ngIf="user.isEnabled" class="status-enabled">Enabled</span>
-                        <span *ngIf="!user.isEnabled" class="status-disabled">Disabled</span>
+                      <td class="text-nowrap align-middle" [ngClass]="{ 'status-enabled': user.isEnabled, 'status-disabled': !user.isEnabled }">
+                        {{ user.isEnabled ? 'Enabled' : 'Disabled' }}
+                      </td>
+                      <td>
+                        <button (click)="DeleteUser(user.id)" class="btn btn-danger">Delete</button>
                       </td>
                       
                     </tr>

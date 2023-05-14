@@ -19,7 +19,7 @@ export class AuthService  {
     return this.http.post<User>(this.apiURL+"/register", user) 
   }
 
-   login(user: User): Observable<any>{
+   login(user: User): Observable<User>{
     return this.http.post<User>(this.apiURL+"/authenticate", user)
     .pipe(
       tap(res => this.saveToken(res.token))

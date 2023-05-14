@@ -5,6 +5,7 @@ import { User } from '../user';
 import { data, error } from 'jquery';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -33,12 +34,27 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user).subscribe(
       response => {
         console.log(response);
-        alert("Login successful");
-        this.router.navigateByUrl('/accueil')
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          confirmButtonColor: '#25377A',
+          title: " Login successfully.",
+          showConfirmButton: true,
+        }).then((response) => {
+            if(response.isConfirmed) {
+              this.router.navigateByUrl('/accueil');
+            }
+        });
       },
       error => {
         console.log(error);
-        alert('login filed');
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          confirmButtonColor: '#25377A',
+          title: " Login est incorrect.",
+          showConfirmButton: true,
+        })
 
       }
     );

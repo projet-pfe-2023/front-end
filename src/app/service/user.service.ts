@@ -19,13 +19,18 @@ export class UserService {
     return this.http.put<User>(url, request);
   }
   
-  findUserById(id: number): Observable<User | null>{
+  findUserById(id: number): Observable<User | null> {
     if (isNaN(id) || id < 1) {
       console.log('Invalid user ID');
       return of(null);
     }
     const url = this.apiURL + "/getuser/" +id; 
     return this.http.get<User>(url);
+  }
+
+  activateUser(userId: number) {
+    const url = this.apiURL + "/" + userId + "/activate";
+    return this.http.post(url, null);
   }
 
   getAllusers() {
@@ -42,5 +47,7 @@ export class UserService {
       );
   }
 
-  
+  deleteUser(id: number): Observable<object>{
+    return this.http.delete(this.apiURL +"/" + id);
+  }
 }

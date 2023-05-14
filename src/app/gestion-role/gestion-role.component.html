@@ -33,10 +33,10 @@
                         </ul>
                       </td>
 
-                      <td class="text-nowrap align-middle">
-                        <span *ngIf="user.isEnabled" class="status-enabled">Enabled</span>
-                        <span *ngIf="!user.isEnabled" class="status-disabled">Disabled</span>
+                      <td class="text-nowrap align-middle" [ngClass]="{ 'status-enabled': user.isEnabled, 'status-disabled': !user.isEnabled }">
+                        {{ user.isEnabled ? 'Enabled' : 'Disabled' }}
                       </td>
+                      
                       
                       <td>
                         <div class="btn-group align-top">
@@ -73,7 +73,7 @@
       <div class="form-group" style="margin-top: 10px;">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" [(ngModel)]="user.isEnabled"
-            [ngModelOptions]="{standalone: true}" id="isEnabled" [checked]="user.isEnabled">
+            [ngModelOptions]="{standalone: true}" id="isEnabled" (change)="updateActivationStatus(user)">
           <label class="form-check-label" for="isEnabled">
             Activer
           </label>
@@ -82,8 +82,8 @@
 
       <div class="row">
         <div class="modal-footer">
-          <button class="btn btn-light"  type="submit" (click)="updateRole(user)">valider</button>
-          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+          <button class="btn btn-light"  type="submit" (click)="updateRole(user)" style="color: white;">valider</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')" style="color: white;">Close</button>
         </div>
       </div>
     </div>
