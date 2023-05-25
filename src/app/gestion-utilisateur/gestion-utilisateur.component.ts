@@ -46,7 +46,8 @@ export class GestionUtilisateurComponent implements OnInit {
           cin: user.cin,
           partenaire: user.partenaire,
           token: user.token,
-          isEnabled: user.isEnabled,
+          isEnabled: user.desactive,
+          desactive:user.desactive,
           authorities: user.authorities.map((authority: Authority) => ({
             authority: authority.authority
           }))

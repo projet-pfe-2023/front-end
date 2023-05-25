@@ -1,37 +1,90 @@
 form {
-    margin-top: 30px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input[type="text"], input[type="password"], input[type="email"], select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  select {
-    height: 40px;
-  }
-  
-  .form-check {
-    margin-top: 15px;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    margin-right: 10px;
-  }
-  
-  .btn-light {
-    background-color: #f8f9fa;
-    color: #000;
-    border: none;
-  }
-  
+  margin-top: 30px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+select {
+  height: 40px;
+}
+
+.form-check {
+  margin-top: 15px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  margin-right: 10px;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  color: #000;
+  border: none;
+}
+
+.cyberpunk-button {
+  background-color: #30cfd0;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.cyberpunk-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #30cfd0;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.cyberpunk-checkbox:before {
+  content: "";
+  background-color: #30cfd0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cyberpunk-checkbox:checked:before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cyberpunk-checkbox-label {
+  font-size: 15px;
+  color: #161616;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}

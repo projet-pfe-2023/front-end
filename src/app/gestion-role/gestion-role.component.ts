@@ -19,7 +19,7 @@ export class GestionRoleComponent implements OnInit {
   roles = ['USER', 'ADMIN'];
   newRole = '';
   id!:number;
-  isEnabled!:boolean;
+ 
 
  
   constructor(private userservice: UserService, private authService: AuthService, 
@@ -27,12 +27,23 @@ export class GestionRoleComponent implements OnInit {
     private cdr: ChangeDetectorRef) {}
   users: User[] = [];
   user: User = new User();
-
+  
   ngOnInit(): void {
     this.getusers();
-    const isEnabled = localStorage.getItem('isEnabled');
+    this.fetchUsers();
   }
 
+  fetchUsers() {
+    this.userservice. getAllusers().subscribe(
+      (users: any[]) => {
+        this.users = users;
+      },
+      error => {
+        console.error('Failed to fetch users:', error);
+      }
+    );
+  }
+  
   
   openLg(Content: any, user: any) {
     this.modalService.open(Content, { size: 'lg' });
@@ -53,7 +64,7 @@ export class GestionRoleComponent implements OnInit {
           cin: user.cin,
           partenaire: user.partenaire,
           token: user.token,
-          isEnabled: user.isEnabled,
+          desactive:user.desactive,
           authorities: user.authorities.map((authority: Authority) => ({
             authority: authority.authority
           }))
@@ -66,41 +77,45 @@ export class GestionRoleComponent implements OnInit {
     );
   }
 
-  updateActivationStatus(user: any) {
-    this.userservice.activateUser(user.id).subscribe(
-      (data: any) => {
-        console.log('User account activated successfully', data);
-        if (data && data.hasOwnProperty('isEnabled')) {
-          localStorage.setItem('isEnabled', data['isEnabled'].toString());
-        }
-        this.getusers(); // Refresh the users array
-        this.cdr.detectChanges(); // Trigger change detection
+
+  
+  activateUser(id: number) {
+    this.userservice.activateUser(id).subscribe(
+      (data) => {
+        console.log('User activated successfully',data);
+        this.fetchUsers();
       },
-      (error) => {
-        console.error('Failed to activate user account:', error);
+      error => {
+        console.error('Failed to activate user:', error);
       }
     );
+    
   }
   
+  deactivateUser(id: number) {
+    this.userservice.deactivateUser(id).subscribe(
+      (data) => {
+        console.log('User deactivated successfully',data);
+        this.fetchUsers();
+      },
+      error => {
+        console.error('Failed to deactivate user:', error);
+      }
+    );
+    
+  }
   
 
   updateRole(user: any) {
     this.userservice.updateUserRole(user.id, this.newRole).subscribe(res => {
       console.log(res);
-      user.isEnabled = true;
       this.getusers();
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        confirmButtonColor: '#25377A',
-        title: "Félicitation! Votre Role est modifier.",
-        showConfirmButton: true,
-      })
+      location.reload();
     },err => {
       console.log(err);
-      
+     
     });
-   
+    
   } 
 
 }

@@ -28,9 +28,15 @@ export class UserService {
     return this.http.get<User>(url);
   }
 
-  activateUser(userId: number) {
-    const url = this.apiURL + "/" + userId + "/activate";
-    return this.http.post(url, null);
+  deactivateUser(id: number): Observable<any> {
+    const url = `${this.apiURL}/${id}/desactiver`;
+    return this.http.put(url, null);
+  }
+
+  // activer les offre
+  activateUser(id: number): Observable<any> {
+    const url = `${this.apiURL}/${id}/activer`;
+    return this.http.put(url, null);
   }
 
   getAllusers() {
