@@ -56,4 +56,9 @@ export class UserService {
   deleteUser(id: number): Observable<object>{
     return this.http.delete(this.apiURL +"/" + id);
   }
+
+  getTotalUsers() {
+    return this.http.get<number>(this.apiURL + "/total");
+  }
+
 }
