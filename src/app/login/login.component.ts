@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
   addlogin() {
     this.authService.login(this.user).subscribe(
       response => {
-        console.log(response);
-        alert("Login successful");
         this.router.navigateByUrl('/accueil')
       },
       error => {

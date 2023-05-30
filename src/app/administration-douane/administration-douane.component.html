@@ -1,0 +1,17 @@
+<header style="background-color: rgb(0, 162, 255);"><h2 style="padding: 1%;">Administration Douane</h2></header>
+<body>
+    <div style="margin: 2%;" class="card">
+      <div class="card-header">
+         <nav class="nav">
+          <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil-douane">Accueil</a>
+          <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="consultation" routerLinkActive="active" >Consultation</a>
+          <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="gestion-role" routerLinkActive="active" >Demande de modefication</a>
+          <button class="btn btn-primary btn-sm" style="margin: 10px;" *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button>
+        </nav>
+      </div>
+      <div class="card-body">
+             <router-outlet></router-outlet>
+      </div>
+    </div>
+     
+  </body>

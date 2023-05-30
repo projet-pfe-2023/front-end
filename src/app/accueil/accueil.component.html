@@ -94,7 +94,7 @@
       <div class="card text-white bg-orange  mb-3" style="max-width: 18rem">
         <div class="card-header" style="background-color: blue;">bienvenu</div>
         <div class="card-body">
-          <a href="#" class="btn btn-secondary btn-lg active"role="button" aria-pressed="true">Déconnexion</a><br />
+          <a href="" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" *ngIf="isLoggedIn()" (click)="logout()">Déconnexion</a><br />
           <a class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" 
           [routerLink]="['/administration/gestion-utilisateur', user.id]" style="margin-top: 2px;">Administration</a>
         </div>

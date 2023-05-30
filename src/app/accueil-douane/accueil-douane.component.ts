@@ -3,12 +3,12 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-accueil-consignateur',
-  templateUrl: './accueil-consignateur.component.html',
-  styleUrls: ['./accueil-consignateur.component.css']
+  selector: 'app-accueil-douane',
+  templateUrl: './accueil-douane.component.html',
+  styleUrls: ['./accueil-douane.component.css']
 })
-export class AccueilConsignateurComponent {
-
+export class AccueilDouaneComponent {
+  
   constructor(private authService: AuthService,private router: Router){}
 
   isLoggedIn(): boolean {
@@ -18,4 +18,5 @@ export class AccueilConsignateurComponent {
   logout(): void {
     this.authService.logout();
   }
+
 }

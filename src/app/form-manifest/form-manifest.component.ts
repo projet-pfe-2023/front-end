@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, } from '@angular/forms';
 import Swal from 'sweetalert2';
+import {Manifest} from '../manifest';
+import {ManifestService} from '../service/manifest.service' ;
 
 @Component({
   selector: 'app-form-manifest',
@@ -8,13 +10,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./form-manifest.component.css']
 })
 export class FormManifestComponent {
-  constructor(private builder: FormBuilder){}
+  manifests: Manifest[] = [];
+  manifest: Manifest = new Manifest();
+
+  constructor(private builder: FormBuilder,private manifestService: ManifestService){}
 
   generalform=this.builder.group({
     bureau :this.builder.control('',Validators.required),
     acconsier :this.builder.control('',Validators.required),
     numvoyage :this.builder.control('',Validators.required),
-    heurearrivee :this.builder.control('',Validators.required),
     datedepart :this.builder.control('',Validators.required),
     datearrivee :this.builder.control('',Validators.required),
     lieudepart :this.builder.control('',Validators.required),
@@ -22,19 +26,19 @@ export class FormManifestComponent {
     code :this.builder.control('',Validators.required),
     nom :this.builder.control('',Validators.required),
     adresse :this.builder.control('',Validators.required),
-    idnavire :this.builder.control('',Validators.required),
+    identificationnavire :this.builder.control('',Validators.required),
     paystransporteur :this.builder.control('',Validators.required),
     placetransporteur :this.builder.control('',Validators.required),
-    datedechargement :this.builder.control('',Validators.required),
-    conducteur1 :this.builder.control('',Validators.required),
-    conducteur2 :this.builder.control('',Validators.required),
-    conducteur3 :this.builder.control('',Validators.required),
-    refimmatricule :this.builder.control('',Validators.required),
-    dateimmatricule :this.builder.control('',Validators.required),
+    decharger :this.builder.control('',Validators.required),
+    nomconducteur :this.builder.control('',Validators.required),
+    nomconducteur2 :this.builder.control('',Validators.required),
+    nomconducteur3 :this.builder.control('',Validators.required),
+    rerfimmatriculation :this.builder.control('',Validators.required),
+    dateimmatriculation :this.builder.control('',Validators.required),
     tonnagebrut :this.builder.control('',Validators.required),
-    nombretitre :this.builder.control('',Validators.required),
-    nombrecolis :this.builder.control('',Validators.required),
-    nombrecontenneurs :this.builder.control('',Validators.required),
+    nembretitre :this.builder.control('',Validators.required),
+    nembrecolis :this.builder.control('',Validators.required),
+    nembreconteneur :this.builder.control('',Validators.required),
   })
   simpleAlert(){
     Swal.fire({
@@ -45,5 +49,15 @@ export class FormManifestComponent {
       timer: 1500
     })
   }
+
+  addManifest() {
+    this.manifestService.addManifest(this.manifest).subscribe(
+      (Response)=>{
+        alert('merch added successfully');
+      },
+  (error) =>{
+    console.error(error);
+  });
+ }
 
 }

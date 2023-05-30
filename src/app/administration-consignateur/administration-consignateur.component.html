@@ -2,66 +2,48 @@
 <body>
   <div style="margin: 2%;" class="card">
     <div class="card-header">
-      <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2" (click)="openXl(content)" >Nouveau manifest </button>
-      </a>
+      <nav class="nav">
+        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil-consignateur">Accueil</a>
+        <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
+          <button  class="btn btn-primary btn-sm" (click)="openXl(content)" style="padding: 10px;" >Nouveau manifest </button>
+        </a>
+        <button type="button" style="margin:10px;" (click)="myFunction()" class="btn btn-primary">Charger manifest</button>
+      </nav>
+
       
-      <button type="button" style="margin-left: 20px;" (click)="myFunction()" class="btn btn-primary">Charger manifest</button>
+      
+      
     </div>
     <div class="card-body">
-      <div class="example-container mat-elevation-z8">
-        <mat-table #table [dataSource]="dataSource">
-      
-          <ng-container matColumnDef="Dossier">
-            <mat-header-cell *matHeaderCellDef> No.Dossier </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Dossier}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="Voyage">
-            <mat-header-cell *matHeaderCellDef> No.Voyage </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Voyage}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="Charger">
-            <mat-header-cell *matHeaderCellDef> Charger le </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Charger}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="Depart">
-            <mat-header-cell *matHeaderCellDef> Depart </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Depart}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="Arrivee">
-            <mat-header-cell *matHeaderCellDef> Arrivee </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Arrivee}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="Dated">
-            <mat-header-cell *matHeaderCellDef> Date de depart </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Dated}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="DateA">
-            <mat-header-cell *matHeaderCellDef> Date d'arrivee </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.DateA}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="Envoyer">
-            <mat-header-cell *matHeaderCellDef> Envoyer le </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Envoyer}} </mat-cell>
-          </ng-container>
-      
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-        
-          <mat-paginator #paginator
-                        [pageSize]="10"
-                        [pageSizeOptions]="[5, 10, 20]"
-                        [showFirstLastButtons]="true">
-          </mat-paginator>
+      <div class="e-table">
+        <div class="table-responsive table-lg mt-3">
+          <table>
+            <thead>
+              <tr>
+                <th>N.Dossier</th>
+                <th class="max-width">N.Voyage</th>
+                <th class="sortable">Charger le</th>
+                <th>Depart</th>
+                <th>Arrivée</th>
+                <th>Date départ</th>
+                <th>Date d'arrivée</th>
+                <th>Plus d'information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let manifest of manifests">
+                <td class="text-nowrap align-middle">{{manifest.id}}</td>
+                <td class="text-nowrap align-middle">{{manifest.numvoyage}}</td>
+                <td class="text-nowrap align-middle">{{manifest.lieudepart}}</td>
+                <td class="text-nowrap align-middle">{{manifest.destination}}</td>
+                <td class="text-nowrap align-middle">{{manifest.datedepart}}</td>
+                <td class="text-nowrap align-middle">{{manifest.datearrive}}</td>
+                <td class="text-nowrap align-middle"><button type="button" class="btn btn-primary" (click)="open(manifestmodal)" >Consulter</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
           
     </div>
   </div>
@@ -90,6 +72,171 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
+  </ng-template>
+
+  <ng-template #manifestmodal let-modal>
+    <h2 class="title">Bureau</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="bureau" >Bureau de douane</label>
+            <input [disabled]="true" [placeholder]="manifest.bureau" type="text"  class="form-control" formControlName="bureau" [(ngModel)]="manifest.bureau" id="bureau">
+            
+        </div>
+
+        <div class="col-md-6">
+            <label for="douala-nature"  >Douala Port Nature</label>
+            <select class="form-control" >
+                <option value="import">import</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="acconsier">Acconsier</label>
+            <input  [disabled]="true" [placeholder]="manifest.acconsier" type="text" class="form-control" formControlName="acconsier " [(ngModel)]="manifest.acconsier" id="acconsier">
+            
+        </div>
+    </div>
+
+    <h2 class="title" style="padding-top: 15px;">Voyage</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="numvoyage" >Numéro de voyage</label>
+                <input [disabled]="true" [placeholder]="manifest.numvoyage" type="text" class="form-control" formControlName="numvoyage" [(ngModel)]="manifest.numvoyage" id="numvoyage">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="datedepart" >Date de départ</label>
+                <input [disabled]="true" [placeholder]="manifest.datedepart" type="date" class="form-control" formControlName="datedepart" [(ngModel)]="manifest.datedepart" id="datedepart">
+                
+            </div>
+
+            
+
+            <div class="col-md-6">
+                <label for="lieudepart" >Lieu de depart</label>
+                <input [disabled]="true" [placeholder]="manifest.lieudepart" type="text" class="form-control" formControlName="lieudepart" [(ngModel)]="manifest.lieudepart" id="lieudepart">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="destination" >Destination</label>
+                <input [disabled]="true" [placeholder]="manifest.destination" type="text" class="form-control" formControlName="destination" [(ngModel)]="manifest.destination" id="destination">
+                
+            </div>
+        </div>
+
+    <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="code" >Code</label>
+                <input [disabled]="true" [placeholder]="manifest.code" type="text" class="form-control" formControlName="code"[(ngModel)]="manifest.bureau" id="code">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="nom" >Nom</label>
+                <input [disabled]="true" [placeholder]="manifest.nom" type="text" class="form-control" formControlName="nom" [(ngModel)]="manifest.nom" id="nom">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="adresse" >Adresse</label>
+                <input [disabled]="true" [placeholder]="manifest.adresse" type="text" class="form-control" formControlName="adresse" [(ngModel)]="manifest.adresse" id="adresse">
+               
+            </div>
+        </div>
+
+    <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="mode-transport" >Mode de transport</label>
+                <select class="form-control" >
+                    <option value="transport-maritine">Transport maritine</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="identificationnavire" >Identification du navire</label>
+                <input [disabled]="true" [placeholder]="manifest.identificationnavire" type="text" class="form-control" formControlName="identificationnavire" [(ngModel)]="manifest.identificationnavire" id="identificationnavire">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="paystransporteur" >Pays du transporteur</label>
+                <input [disabled]="true" [placeholder]="manifest.paystransporteur" type="text" class="form-control" formControlName="paystransporteur" [(ngModel)]="manifest.paystransporteur" id="paystransporteur">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="placetransporteur" >Place du transporteur</label>
+                <input [disabled]="true" [placeholder]="manifest.placetransporteur" type="text" class="form-control" formControlName="placetransporteur" [(ngModel)]="manifest.placetransporteur" id="placetransporteur">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="decharger" >Decharger le</label>
+                <input [disabled]="true" [placeholder]="manifest.decharger" type="date" class="form-control" formControlName="decharger" [(ngModel)]="manifest.decharger" id="decharger">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="nomconducteur" >Nom conducteur</label>
+                <input [disabled]="true" [placeholder]="manifest.nomconducteur"type="text" class="form-control" formControlName="nomconducteur" [(ngModel)]="manifest.nomconducteur" id="nomconducteur">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="nomconducteur2" >Nom conducteur2</label>
+                <input [disabled]="true" [placeholder]="manifest.nomconducteur2" type="text" class="form-control" formControlName="nomconducteur2" [(ngModel)]="manifest.nomconducteur2" id="nomconducteur2">
+               
+            </div> 
+
+            <div class="col-md-6">
+                <label for="nomconducteur3" >Nom conducteur3</label>
+                <input [disabled]="true" [placeholder]="manifest.nomconducteur3" type="text" class="form-control" formControlName="nomconducteur3" [(ngModel)]="manifest.nomconducteur3" id="nomconducteur3">
+                
+            </div> 
+
+            <div class="col-md-6">
+                <label for="rerfimmatriculation" >Ref.Immatriculation</label>
+                <input [disabled]="true" [placeholder]="manifest.rerfimmatriculation" type="text" class="form-control" formControlName="rerfimmatriculation" [(ngModel)]="manifest.rerfimmatriculation" id="rerfimmatriculation">
+                
+            </div> 
+
+            <div class="col-md-6">
+                <label for="dateimmatriculation" >Date Immatriculation</label>
+                <input [disabled]="true" [placeholder]="manifest.dateimmatriculation" type="date" class="form-control" formControlName="dateimmatriculation" [(ngModel)]="manifest.bureau" id="dateimmatriculation">
+                
+            </div>
+        </div>
+    
+    <h2 class="title" style="padding-top: 15px;">Consignataire</h2> 
+        <div class="row">
+            <div class="col-md-6">
+                <label for="tonnagebrut" >Tonnage brut</label>
+                <input [disabled]="true" [placeholder]="manifest.tonnagebrut" type="number" class="form-control" formControlName="tonnagebrut" [(ngModel)]="manifest.bureau" id="tonnagebrut">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="nembretitre" >Nombre de titre</label>
+                <input [disabled]="true" [placeholder]="manifest.nembretitre" type="number" class="form-control" formControlName="nembretitre" [(ngModel)]="manifest.nembretitre" id="nembretitre">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="nembrecolis" >Nombre de colis</label>
+                <input [disabled]="true" [placeholder]="manifest.nembrecolis" type="number" class="form-control" formControlName="nembrecolis" [(ngModel)]="manifest.nembrecolis" id="nembrecolis">
+                
+            </div>
+
+            <div class="col-md-6">
+                <label for="nembreconteneur" >Nombre de contenneurs</label>
+                <input [disabled]="true" [placeholder]="manifest.nembreconteneur" type="number" class="form-control" formControlName="nembreconteneur" [(ngModel)]="manifest.nembreconteneur" id="nembreconteneur">
+                
+            </div>
+        </div>
   </ng-template>
    
 </body>

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
-  selector: 'app-accueil-consignateur',
-  templateUrl: './accueil-consignateur.component.html',
-  styleUrls: ['./accueil-consignateur.component.css']
+  selector: 'app-administration-douane',
+  templateUrl: './administration-douane.component.html',
+  styleUrls: ['./administration-douane.component.css']
 })
-export class AccueilConsignateurComponent {
+export class AdministrationDouaneComponent {
 
   constructor(private authService: AuthService,private router: Router){}
 
@@ -15,7 +15,9 @@ export class AccueilConsignateurComponent {
     return this.authService.isLoggedIn();
   }
 
+
   logout(): void {
     this.authService.logout();
   }
+
 }

@@ -3,10 +3,10 @@
   <div style="margin: 2%;" class="card">
     <div class="card-header">
        <nav class="nav">
-        <a class="nav-link btn btn-primary btn-sm active" role="button" aria-pressed="true" routerLink="gestion-utilisateur/:id" routerLinkActive="active" >Gestion des utilisateur</a>
-        <a class="nav-link btn btn-primary btn-sm active" role="button" aria-pressed="true" routerLink="gestion-role" routerLinkActive="active" >Gestion des roles des utilisateurs</a>
-        <a class="nav-link btn btn-primary btn-sm active" role="button" aria-pressed="true" href="accueil">Accueil</a>
-        <button class="btn btn-primary btn-sm" *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button>
+        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil">Accueil</a>
+        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="gestion-utilisateur/:id" routerLinkActive="active" >Gestion des utilisateur</a>
+        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="gestion-role" routerLinkActive="active" >Gestion des roles des utilisateurs</a>
+        <button class="btn btn-primary btn-sm" style="margin: 10px;" *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button>
       </nav>
     </div>
     <div class="card-body">

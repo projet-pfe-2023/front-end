@@ -1,85 +1,134 @@
-<form class="reg-form" [formGroup]="intervenantform">
-    <h2 class="title">Exportateur/Expéditeur</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="nome" >Nom</label>
-            <input  type="text" class="form-control" formControlName="nome" id="nome">
-            <div
-                *ngIf="intervenantform.get('nome')?.invalid && intervenantform.get('nome')?.touched">
-                <small
-                *ngIf="intervenantform.get('nome')?.invalid && intervenantform.get('nome')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <label for="adresse" >Adresse</label>
-            <input  type="text" class="form-control" formControlName="adresse" id="adresse">
-            <div
-                *ngIf="intervenantform.get('adresse')?.invalid && intervenantform.get('adresse')?.touched">
-                <small
-                *ngIf="intervenantform.get('adresse')?.invalid && intervenantform.get('adresse')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
+<div style="margin: 2%;" class="card">
+    <div class="card-header">
+        <button  class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)" >Nouveau Marchandises</button>
     </div>
-<h2 class="title">Destinataire</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="numerocontribuable" >Numéro contribuable</label>
-            <input  type="text" class="form-control" formControlName="numerocontribuable" id="numerocontribuable">
-            <div
-                *ngIf="intervenantform.get('numerocontribuable')?.invalid && intervenantform.get('numerocontribuable')?.touched">
-                <small
-                *ngIf="intervenantform.get('numerocontribuable')?.invalid && intervenantform.get('numerocontribuable')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <label for="nomd" >Nom</label>
-            <input  type="text" class="form-control" formControlName="nomd" id="nomd">
-            <div
-                *ngIf="intervenantform.get('nomd')?.invalid && intervenantform.get('nomd')?.touched">
-                <small
-                *ngIf="intervenantform.get('nomd')?.invalid && intervenantform.get('nomd')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <label for="telephone" >Telephone</label>
-            <input  type="text" class="form-control" formControlName="telephone" id="telephone">
-            <div
-                *ngIf="intervenantform.get('telephone')?.invalid && intervenantform.get('telephone')?.touched">
-                <small
-                *ngIf="intervenantform.get('telephone')?.invalid && intervenantform.get('telephone')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <label for="email" >Email</label>
-            <input  type="email" class="form-control" formControlName="email" id="email">
-            <div
-                *ngIf="intervenantform.get('email')?.invalid && intervenantform.get('email')?.touched">
-                <small
-                *ngIf="intervenantform.get('email')?.invalid && intervenantform.get('email')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <label for="adressed" >Adresse</label>
-            <input  type="text" class="form-control" formControlName="adressed" id="adressed">
-            <div
-                *ngIf="intervenantform.get('adressed')?.invalid && intervenantform.get('adressed')?.touched">
-                <small
-                *ngIf="intervenantform.get('adressed')?.invalid && intervenantform.get('adressed')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
+    <div class="card-body">
+        <div class="example-container mat-elevation-z8">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th class="max-width">Adresse</th>
+                <th class="sortable">Numero Contribuable</th>
+                <th>Nom 2</th>
+                <th>Telephone</th>
+                <th>Adresse 2</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let intervenant of intervenants">
+                <td class="text-nowrap align-middle">{{intervenant.nom}}</td>
+                <td class="text-nowrap align-middle"><span>{{intervenant.adresse}}</span></td>
+                <td class="text-nowrap align-middle">{{intervenant.numerocontribuable}}</td>
+                <td class="text-nowrap align-middle">{{intervenant.nom2}}</td>
+                <td class="text-nowrap align-middle">{{intervenant.telephone}}</td>
+                <td class="text-nowrap align-middle">{{intervenant.adresse2}}</td>
+                <td class="text-nowrap align-middle">{{intervenant.email}}</td>
+              </tr>
+            </tbody>
+          </table>
+            
+      </div>
     </div>
-    <button type="button" style="margin: 20px;" class="btn btn-primary" (click)="simpleAlert()">Enregistrer</button>
+</div>
 
-</form>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h2>Intervenant</h2>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form #Intervenantform="ngForm" class="reg-form" [formGroup]="intervenantform" (submit)="addIntervenant()">
+        <h2 class="title">Exportateur/Expéditeur</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="nom" >Nom</label>
+                <input  type="text" class="form-control" formControlName="nome" [(ngModel)]="intervenant.nom" id="nom">
+                <div
+                    *ngIf="intervenantform.get('nom')?.invalid && intervenantform.get('nom')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('nom')?.invalid && intervenantform.get('nom')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="adresse" >Adresse</label>
+                <input  type="text" class="form-control" formControlName="adresse" [(ngModel)]="intervenant.adresse" id="adresse">
+                <div
+                    *ngIf="intervenantform.get('adresse')?.invalid && intervenantform.get('adresse')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('adresse')?.invalid && intervenantform.get('adresse')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+        </div>
+    <h2 class="title">Destinataire</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="numerocontribuable" >Numéro contribuable</label>
+                <input  type="text" class="form-control" formControlName="numerocontribuable" [(ngModel)]="intervenant.numerocontribuable" id="numerocontribuable">
+                <div
+                    *ngIf="intervenantform.get('numerocontribuable')?.invalid && intervenantform.get('numerocontribuable')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('numerocontribuable')?.invalid && intervenantform.get('numerocontribuable')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="nom2" >Nom</label>
+                <input  type="text" class="form-control" formControlName="nom2" [(ngModel)]="intervenant.nom" id="nom2">
+                <div
+                    *ngIf="intervenantform.get('nom2')?.invalid && intervenantform.get('nom2')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('nom2')?.invalid && intervenantform.get('nom2')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="telephone" >Telephone</label>
+                <input  type="text" class="form-control" formControlName="telephone" [(ngModel)]="intervenant.telephone" id="telephone">
+                <div
+                    *ngIf="intervenantform.get('telephone')?.invalid && intervenantform.get('telephone')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('telephone')?.invalid && intervenantform.get('telephone')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" >Email</label>
+                <input  type="email" class="form-control" formControlName="email" [(ngModel)]="intervenant.email" id="email">
+                <div
+                    *ngIf="intervenantform.get('email')?.invalid && intervenantform.get('email')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('email')?.invalid && intervenantform.get('email')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="adressed" >Adresse</label>
+                <input  type="text" class="form-control" formControlName="adressed" [(ngModel)]="intervenant.adresse2" id="adresse2">
+                <div
+                    *ngIf="intervenantform.get('adressed')?.invalid && intervenantform.get('adressed')?.touched">
+                    <small
+                    *ngIf="intervenantform.get('adressed')?.invalid && intervenantform.get('adressed')?.touched"
+                    class="text-danger"  > *Leave type is required</small>
+                </div>
+            </div>
+        </div>
+        <button type="submit" style="margin: 20px;" class="btn btn-primary" (click)="simpleAlert()">Enregistrer</button>
+
+    </form>
+    </div>
+    <div class="modal-footer">
+        
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+</ng-template>
+
+    

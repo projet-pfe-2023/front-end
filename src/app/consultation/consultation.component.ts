@@ -1,26 +1,20 @@
-import {AfterViewInit, Component, ViewChild,ViewEncapsulation } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import Swal from 'sweetalert2';
+import { Component } from '@angular/core';
 import {Manifest} from '../manifest';
 import {ManifestService} from '../service/manifest.service' ;
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-administration-consignateur',
-  templateUrl: './administration-consignateur.component.html',
-  styleUrls: ['./administration-consignateur.component.css']
+  selector: 'app-consultation',
+  templateUrl: './consultation.component.html',
+  styleUrls: ['./consultation.component.css']
 })
-export class AdministrationConsignateurComponent {
+export class ConsultationComponent {
   manifests: Manifest[] = [];
   manifest: Manifest = new Manifest();
-  
-  constructor(private modalService: NgbModal,private manifestService: ManifestService) {}
+
+  constructor(private manifestService: ManifestService,private modalService: NgbModal){}
   openXl(content: any) {
 		this.modalService.open(content, { size: 'xl' });
-	}
-  open(manifestmodal: any) {
-		this.modalService.open(manifestmodal, { size: 'xl' });
 	}
   ngOnInit(): void {
     this.getmanifests();
@@ -65,31 +59,4 @@ export class AdministrationConsignateurComponent {
       }
     );
   }
-  
-
-    myFunction() {
-      (async () => {
-        const { value: file } = await Swal.fire({
-          title: 'Select Manifest',
-          input: 'file',
-          inputAttributes: {
-            'accept': '*',
-            'aria-label': 'Upload your Manifest'
-          }
-        })
-      
-        if (file && file.type === 'application/pdf') {
-          const reader = new FileReader()
-          reader.onload = (e: any) => {
-            Swal.fire({
-              title: 'le Manifest selectionner',
-              html: `<embed src="${e.target.result}" width="100%" height="600px" />`
-            })
-          }
-          reader.readAsDataURL(file)
-        }
-      })()
-  }
-
-  }
-
+}

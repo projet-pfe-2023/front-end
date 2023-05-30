@@ -1,37 +1,60 @@
-import {AfterViewInit, Component, ViewChild,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild,ViewEncapsulation } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { FormBuilder, Validators, } from '@angular/forms';
+import { Merch } from '../merch';
+import { MerchService } from '../service/merch.service';
 
 @Component({
   selector: 'app-marchandises',
   templateUrl: './marchandises.component.html',
   styleUrls: ['./marchandises.component.css']
 })
-export class MarchandisesComponent  {
+export class MarchandisesComponent implements OnInit {
+  merchs: Merch[] = [];
+  merch: Merch = new Merch();
+  merchform: any;
 
-  closeResult!: string;
-  displayedColumns = ['Marque', 'Poids', 'Volume', 'Designation1'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
-  constructor(private modalService: NgbModal,private builder: FormBuilder) {}
-  marchandisesform=this.builder.group({
-    marque :this.builder.control('',Validators.required),
-    poid :this.builder.control('',Validators.required),
-    volume :this.builder.control('',Validators.required),
-    designation :this.builder.control('',Validators.required),
-  })
+  constructor(private modalService: NgbModal,private builder: FormBuilder,private merchService: MerchService) {}
+
+  ngOnInit(): void {
+
+    this.merchform=this.builder.group({
+      marque :this.builder.control('',Validators.required),
+      mass :this.builder.control('',Validators.required),
+      volume :this.builder.control('',Validators.required),
+      designation :this.builder.control('',Validators.required),
+    })
+
+    this.getmerchs();
+  }
+  private getmerchs(): void{
+    this.merchService.getAllMerch().subscribe(
+      (merchs: Merch[]) => {
+        // Map the returned array of users to the User interface
+        this.merchs = merchs.map((merch: Merch) => ({
+          id: merch.id,
+          marque: merch.marque,
+          mass: merch.mass,
+          volume: merch.volume,
+          designation: merch.designation
+        }));
+        console.log(this.merchs);
+      },
+      (error: any) => {
+        console.error('Failed to fetch users', error);
+      }
+    );
+  }
+
+  
 
 	openLg(content: any) {
 		this.modalService.open(content, { size: 'lg' });
 	}
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
- 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
   simpleAlert(){
     Swal.fire({
       position: 'top-end',
@@ -41,17 +64,18 @@ export class MarchandisesComponent  {
       timer: 1500
     })
   }
+
+  addMerch() {
+    this.merchService.addMerch(this.merch).subscribe(
+      (Response)=>{
+        alert('merch added successfully');
+        console.log(Response);
+        this.merch = { id:0 ,marque: '', mass: 0,volume:0, designation:''};
+  },
+  (error) =>{
+    console.error(error);
+  });
+
+
+ }
   }
-
-
-  export interface Element {
-    Marque: string;
-    Poids: string;
-    Volume: string;
-    Designation1: string;
-
-  }
-
-  const ELEMENT_DATA: Element[] = [
-    { Marque: 'Hydrogen',Poids: 'Hydrogen',Volume: 'Hydrogen',Designation1: 'Hydrogen' }
-  ];

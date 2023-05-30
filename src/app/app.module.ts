@@ -26,6 +26,9 @@ import { ConteneurComponent } from './conteneur/conteneur.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { AccueilDouaneComponent } from './accueil-douane/accueil-douane.component';
+import { ConsultationComponent } from './consultation/consultation.component';
+import { AdministrationDouaneComponent } from './administration-douane/administration-douane.component';
 
 
 
@@ -46,6 +49,9 @@ import { CreateUserComponent } from './create-user/create-user.component';
     MarchandisesComponent,
     ConteneurComponent,
     CreateUserComponent,
+    AccueilDouaneComponent,
+    ConsultationComponent,
+    AdministrationDouaneComponent,
 
   ],
   imports: [
