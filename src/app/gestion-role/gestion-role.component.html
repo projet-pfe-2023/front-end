@@ -33,17 +33,15 @@
                         </ul>
                       </td>
 
-                      <td class="text-nowrap align-middle">
-                        <span *ngIf="user.isEnabled" class="status-enabled">Enabled</span>
-                        <span *ngIf="!user.isEnabled" class="status-disabled">Disabled</span>
-                      </td>
-                      
+                      <td class="text-nowrap align-middle {{ user.desactive ? 'active' : 'not-active' }}"> {{ user.desactive ? 'Activated' : 'Not Activated' }} </td>
+
                       <td>
                         <div class="btn-group align-top">
-                          <button type="button" class="btn btn-primary"
-                            (click)="openLg(content, user)" data-toggle="modal"
-                            data-target="#user-form-modal">Edit</button>
-                        </div>
+                          <button type="button" class="btn btn-outline-primary" (click)="openLg(content, user)"
+                            data-toggle="modal" data-target="#user-form-modal" style="border-radius: 0.9375em;">Edit</button>
+                            <button type="button" class="btn btn-outline-success" (click)="activateUser(user.id)" style="margin-left: 3px; border-radius: 0.9375em;">activer</button>
+                            <button type="button" class="btn btn-outline-danger" (click)="deactivateUser(user.id)" style="margin-left: 3px;border-radius: 0.9375em;">desactiver</button>
+                          </div>
                       </td>
                     </tr>
                   </tbody>
@@ -58,34 +56,26 @@
 </div>
 
 <ng-template #content let-modal>
-  <div class="modal-body" >
+  <div class="modal-body">
     <h1 mat-dialog-title>Update User</h1>
     <div class="form-group">
       <label>
         <h4>Role</h4>
       </label>
       <div>
-        <select class="form-select" aria-label="Default select example"  id="role" [(ngModel)]="newRole">
+        <select class="form-select" aria-label="Default select example" id="role" [(ngModel)]="newRole">
           <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
         </select>
       </div>
-      
-      <div class="form-group" style="margin-top: 10px;">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" [(ngModel)]="user.isEnabled"
-            [ngModelOptions]="{standalone: true}" id="isEnabled" [checked]="user.isEnabled">
-          <label class="form-check-label" for="isEnabled">
-            Activer
-          </label>
-        </div>
-      </div>
+
 
       <div class="row">
         <div class="modal-footer">
-          <button class="btn btn-light"  type="submit" (click)="updateRole(user)">valider</button>
-          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+          <button class="btn btn-success" type="submit" (click)="updateRole(user)">valider</button>
+          <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Close</button>
         </div>
       </div>
     </div>
   </div>
+
 </ng-template>

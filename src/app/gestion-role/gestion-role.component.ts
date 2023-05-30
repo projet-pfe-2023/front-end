@@ -6,6 +6,7 @@ import { UserService } from '../service/user.service';
 import { AuthService } from '../service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Authority, User } from '../user';
+import { error } from 'jquery';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class GestionRoleComponent implements OnInit {
   roles = ['USER', 'ADMIN'];
   newRole = '';
   id!:number;
-
+ 
 
  
   constructor(private userservice: UserService, private authService: AuthService, 
@@ -26,11 +27,23 @@ export class GestionRoleComponent implements OnInit {
     private cdr: ChangeDetectorRef) {}
   users: User[] = [];
   user: User = new User();
-
+  
   ngOnInit(): void {
     this.getusers();
+    this.fetchUsers();
   }
 
+  fetchUsers() {
+    this.userservice. getAllusers().subscribe(
+      (users: any[]) => {
+        this.users = users;
+      },
+      error => {
+        console.error('Failed to fetch users:', error);
+      }
+    );
+  }
+  
   
   openLg(Content: any, user: any) {
     this.modalService.open(Content, { size: 'lg' });
@@ -51,7 +64,7 @@ export class GestionRoleComponent implements OnInit {
           cin: user.cin,
           partenaire: user.partenaire,
           token: user.token,
-          isEnabled: user.isEnabled,
+          desactive:user.desactive,
           authorities: user.authorities.map((authority: Authority) => ({
             authority: authority.authority
           }))
@@ -64,23 +77,45 @@ export class GestionRoleComponent implements OnInit {
     );
   }
 
+
+  
+  activateUser(id: number) {
+    this.userservice.activateUser(id).subscribe(
+      (data) => {
+        console.log('User activated successfully',data);
+        this.fetchUsers();
+      },
+      error => {
+        console.error('Failed to activate user:', error);
+      }
+    );
+    
+  }
+  
+  deactivateUser(id: number) {
+    this.userservice.deactivateUser(id).subscribe(
+      (data) => {
+        console.log('User deactivated successfully',data);
+        this.fetchUsers();
+      },
+      error => {
+        console.error('Failed to deactivate user:', error);
+      }
+    );
+    
+  }
+  
+
   updateRole(user: any) {
     this.userservice.updateUserRole(user.id, this.newRole).subscribe(res => {
       console.log(res);
-      user.isEnabled = true;
       this.getusers();
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        confirmButtonColor: '#25377A',
-        title: "Félicitation! Votre Role est modifier.",
-        showConfirmButton: true,
-      })
+      location.reload();
     },err => {
       console.log(err);
-      
+     
     });
-   
+    
   } 
 
 }

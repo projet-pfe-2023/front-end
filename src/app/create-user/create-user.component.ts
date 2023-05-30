@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Authority, User } from '../user';
 import { AuthService } from '../service/auth.service';
 import { ActivatedRoute, Router,Params} from '@angular/router';
 import Swal from 'sweetalert2';
@@ -13,14 +13,29 @@ import { UserService } from '../service/user.service';
 
 
 export class CreateUserComponent implements OnInit{
-  user: User = new User();
- 
-  constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute,private userservice: UserService){}
+  desactive:boolean = false ;
+  id!: number;
+  constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute,
+    private userservice: UserService, private cdr: ChangeDetectorRef){}
 
-  ngOnInit(): void {
+    user: User = new User();
+    users: User[] = [];
+
+    ngOnInit(): void {
+      this.fetchUsers();
+      
+    }
+    fetchUsers() {
+      this.userservice. getAllusers().subscribe(
+        (users: any[]) => {
+          this.users = users;
+        },
+        error => {
+          console.error('Failed to fetch users:', error);
+        }
+      );
+    }
     
-  }
-
   createUser(): void {
     this.authService.addUser(this.user).subscribe(
       (data: User) => {
@@ -43,6 +58,21 @@ export class CreateUserComponent implements OnInit{
   goToUserList() {
     this.router.navigate(['administration/gestion-utilisateur/:id']);
   }
+
+  activateUser(id: number) {
+    this.userservice.activateUser(id).subscribe(
+      (data) => {
+        console.log('User activated successfully',data);
+        this.fetchUsers();
+      },
+      error => {
+        console.error('Failed to activate user:', error);
+      }
+    );
+    
+  }
+  
+  
   
 
 }

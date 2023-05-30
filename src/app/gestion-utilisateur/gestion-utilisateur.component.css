@@ -40,7 +40,7 @@ th {
 
 .btn-outline-secondary:hover {
   background-color: #3d87c7;
-  color: #fff;
+  color: #bbb8b8;
 }
 
 .badge {
@@ -139,42 +139,113 @@ ul {
   margin: 0;
  
 }
-button {
+
+.active {
+  color: green;
+}
+
+.not-active {
+  color: red;
+}
+
+.cssbuttons {
+  appearance: none;
+  background-color: transparent;
+  border: 0.125em solid #1A1A1A;
+  border-radius: 0.9375em;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
   display: inline-block;
-  border-radius: 4px;
-  background-color: #3d405b;
-  border: none;
-  color: #b8b0b0;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: normal;
+  margin: 0;
+  min-height: 3.75em;
+  min-width: 0;
+  outline: none;
+  padding: 1em 2.3em;
   text-align: center;
-  font-size: 17px;
-  padding: 16px;
-  width: 130px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+ }
+.cssbuttons:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.cssbuttons:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+.cssbuttons:disabled {
+  pointer-events: none;
  }
  
- button span {
+ button.noselect {
+  width: 150px;
+  height: 50px;
   cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
- }
- 
- button span:after {
-  content: '»';
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+button.noselect,
+button.noselect span {
+  transition: 200ms;
+}
+
+button.noselect .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+button.noselect .icon {
   position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -15px;
-  transition: 0.5s;
- }
- 
- button:hover span {
-  padding-right: 15px;
- }
- 
- button:hover span:after {
-  opacity: 1;
-  right: 0;
- }
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.noselect svg {
+  width: 15px;
+  fill: #eee;
+}
+
+button.noselect:hover {
+  background: #ff3636;
+}
+
+button.noselect:hover .text {
+  color: transparent;
+}
+
+button.noselect:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+button.noselect:focus {
+  outline: none;
+}
+
+button.noselect:active .icon svg {
+  transform: scale(0.8);
+}

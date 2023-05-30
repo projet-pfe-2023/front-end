@@ -4,7 +4,7 @@ import { User, Authority } from '../user';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
-import { error } from 'jquery';
+import { data, error } from 'jquery';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
@@ -46,7 +46,8 @@ export class GestionUtilisateurComponent implements OnInit {
           cin: user.cin,
           partenaire: user.partenaire,
           token: user.token,
-          isEnabled: user.isEnabled,
+          isEnabled: user.desactive,
+          desactive:user.desactive,
           authorities: user.authorities.map((authority: Authority) => ({
             authority: authority.authority
           }))
@@ -58,9 +59,22 @@ export class GestionUtilisateurComponent implements OnInit {
       }
     );
   }
+  
 
   onCreate(){
     this.router.navigate(['administration/create-user']);
+  }
+
+  DeleteUser(id :number){
+    this.userservice.deleteUser(id).subscribe( 
+      data => {
+        console.log(data);
+        location.reload();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

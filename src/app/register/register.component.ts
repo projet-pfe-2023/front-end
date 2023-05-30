@@ -53,7 +53,13 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         console.error(error);
-        alert('wrong!');
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          confirmButtonColor: '#25377A',
+          title: " Votre inscription est incorrect.",
+          showConfirmButton: true,
+        })
         
       });
   }

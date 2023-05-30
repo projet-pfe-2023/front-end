@@ -8,7 +8,7 @@ export class User {
     partenaire!:string;
     authorities: Authority[] = [];
     token!:string;
-    isEnabled!:boolean ;
+    desactive!:boolean ;
   }
   export interface Authority {
     authority: string;
