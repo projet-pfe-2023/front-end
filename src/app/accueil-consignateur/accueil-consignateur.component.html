@@ -1,27 +1,18 @@
 <div class="row">
     <div class="col-sm-10">
       <div class="card">
-        <h5 class="card-header">Consignateur Test</h5>
+        <h5 class="card-header" style="background-color: #ff7b00;color: #fff;">Consignateur Test</h5>
         <div class="card-body">
           <div class="card1">
-            <div class="card-header">
-              <select style="width: 30%;" name="" id="">
-                <option  value="">Sélectionner une procedure</option>
-              </select>
-              <select style="margin-left: 10%;width: 30%" name="" id="">
-                <option  value="">Sélectionner une procedure</option>
-              </select>
-              <button style="margin-left:  10%;" type="button" class="btn btn-info">
-                Accéder au formulaire</button
-              ><br />
-              <h5 style="text-align: center; margin-top: 8px;">Liste de procedure</h5>
+            <div class="card-header" style="background-color: blue;">
+              <h5 style="text-align: center; margin-top: 8px;color: #fff;">Liste de procedure</h5>
             </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-6">
   
                   <div class="card">
-                    <div class="card-header">Procedure manifest</div>
+                    <div class="card-header" style="background-color: blue;"><h5 style="color: #fff;">Procedure manifest</h5></div>
                     <div class="card-body">
                       <div class="row">
 
@@ -59,19 +50,18 @@
             </div>
           </div>
         </div>
-        <div class="card-footer">
-          <h5 style="text-align: center;">Liste de procedure</h5>
+        <div class="card-footer"style="background-color: blue;">
+          <h5 style="text-align: center;color: #fff;">Liste de procedure</h5>
         </div>
       </div>
     </div>
     <div class="col-sm-2">
       <div class="cards">
-    <div class="card text-white bg-dark mb-3" style="max-width: 18rem">
-      <div class="card-header">bienvenu</div>
+    <div class="card text-white bg-orange mb-3" style="max-width: 18rem">
+      <div class="card-header" style="background-color: blue;">bienvenu</div>
       <div class="card-body">
-        <a href="">Déconnexion</a><br />
-        <a href="">Modefier mot de passe</a><br />
-        <a href="administration-consignateur">Administration</a>
+        <a href="" class="btn btn-secondary btn-lg active" style="margin: 5px;" role="button" aria-pressed="true" *ngIf="isLoggedIn()" (click)="logout()">Déconnexion</a><br />
+        <a href="administration-consignateur" class="btn btn-secondary btn-lg active" style="margin: 5px;" role="button" aria-pressed="true">Administration</a>
       </div>
     </div>
     <div class="card text-white bg-dark mb-3" style="max-width: 18rem">

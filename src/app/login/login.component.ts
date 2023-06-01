@@ -38,22 +38,18 @@ export class LoginComponent implements OnInit {
           position: 'top',
           icon: 'success',
           confirmButtonColor: '#25377A',
-          title: " Login successfully.",
+          title: " Login est correct.",
           showConfirmButton: true,
-        }).then((response) => {
-            if(response.isConfirmed) {
-              this.router.navigateByUrl('/accueil');
-            }
-        });
+        })
+        this.router.navigateByUrl('/accueil')
       },
       error => {
         console.log(error);
         Swal.fire({
-          position: 'top',
-          icon: 'success',
-          confirmButtonColor: '#25377A',
-          title: " Login est incorrect.",
-          showConfirmButton: true,
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+       
         })
 
       }

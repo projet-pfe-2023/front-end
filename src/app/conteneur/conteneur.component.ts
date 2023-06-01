@@ -1,62 +1,83 @@
-import {AfterViewInit, Component, ViewChild,ViewEncapsulation } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { FormBuilder, Validators, } from '@angular/forms';
+import { Conteneur } from '../conteneur';
+import { ConteneurService } from '../service/conteneur.service';
 
 @Component({
   selector: 'app-conteneur',
   templateUrl: './conteneur.component.html',
   styleUrls: ['./conteneur.component.css']
 })
-export class ConteneurComponent {
+export class ConteneurComponent implements OnInit {
+  conteneurs: Conteneur[] = [];
+  conteneur: Conteneur = new Conteneur();
 
-  closeResult!: string;
-  displayedColumns = ['Identification', 'Type', 'Remp', 'Scelles','Marque','Resp'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
-  constructor(private modalService: NgbModal,private builder: FormBuilder) {}
-  conteneurform=this.builder.group({
-    identification :this.builder.control('',Validators.required),
-    type :this.builder.control('',Validators.required),
-    remp :this.builder.control('',Validators.required),
-    scelles :this.builder.control('',Validators.required),
-    marque :this.builder.control('',Validators.required),
-    resp :this.builder.control('',Validators.required),
+  constructor(private modalService: NgbModal, private builder: FormBuilder, private conteneurService: ConteneurService) { }
+
+  ngOnInit(): void {
+    this.getconteneurs();
+  }
+  private getconteneurs(): void {
+    this.conteneurService.getAllConteneur().subscribe(
+      (conteneurs: Conteneur[]) => {
+        this.conteneurs = conteneurs.map((conteneur: Conteneur) => ({
+          id: conteneur.id,
+          type: conteneur.type,
+          remp: conteneur.remp,
+          scalle: conteneur.scalle,
+          marque: conteneur.marque,
+          resp: conteneur.resp
+        }));
+        console.log(this.conteneurs);
+      },
+      (error: any) => {
+        console.error('Failed to fetch users', error);
+      }
+    );
+  }
+
+  conteneurform = this.builder.group({
+    id: this.builder.control('', Validators.required),
+    type: this.builder.control('', Validators.required),
+    remp: this.builder.control('', Validators.required),
+    scalle: this.builder.control('', Validators.required),
+    marque: this.builder.control('', Validators.required),
+    resp: this.builder.control('', Validators.required),
   })
 
-	openLg(content: any) {
-		this.modalService.open(content, { size: 'lg' });
-	}
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  openLg(content: any) {
+    this.modalService.open(content, { size: 'lg' });
+  }
 
- 
+
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  simpleAlert(){
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Enregistrer avec succés',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  }
-  }
-
-
-  export interface Element {
-    Identification: string;
-    Type: string;
-    Remp: string;
-    Scelles: string;
-    Marque: string;
-    Resp: string;
 
   }
 
-  const ELEMENT_DATA: Element[] = [
-    { Identification: 'Hydrogen',Type: 'Hydrogen',Remp: 'Hydrogen',Scelles: 'Hydrogen',Marque:'hhh',Resp:'ggg' }
-  ];
+
+  addConteneur() {
+    this.conteneurService.addConteneur(this.conteneur).subscribe(
+      (Response) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Enregistrer avec succés',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        console.log(Response);
+        this.conteneur = { id: 0, type: '', remp: '', scalle: '', marque: '', resp: '' };
+      },
+      (error) => {
+        console.error(error);
+      });
+
+
+  }
+}
+
+
+
 

@@ -2,7 +2,9 @@ import {AfterViewInit, Component, ViewChild,ViewEncapsulation } from '@angular/c
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import {Manifest} from '../manifest';
+import {ManifestService} from '../service/manifest.service' ;
 
 @Component({
   selector: 'app-administration-consignateur',
@@ -10,20 +12,59 @@ import Swal from 'sweetalert2'
   styleUrls: ['./administration-consignateur.component.css']
 })
 export class AdministrationConsignateurComponent {
-
-  closeResult!: string;
-  displayedColumns = ['Dossier', 'Voyage', 'Charger', 'Depart','Arrivee','Dated','DateA','Envoyer'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
-  constructor(private modalService: NgbModal) {}
+  manifests: Manifest[] = [];
+  manifest: Manifest = new Manifest();
+  
+  constructor(private modalService: NgbModal,private manifestService: ManifestService) {}
   openXl(content: any) {
 		this.modalService.open(content, { size: 'xl' });
 	}
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
- 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  open(manifestmodal: any) {
+		this.modalService.open(manifestmodal, { size: 'xl' });
+	}
+  ngOnInit(): void {
+    this.getmanifests();
   }
+  private getmanifests(): void{
+    this.manifestService.getAllManifest().subscribe(
+      (manifests: Manifest[]) => {
+        this.manifests = manifests.map((manifest: Manifest) => ({
+          id: manifest.id,
+          bureau: manifest.bureau,
+          douala: manifest.douala,
+          acconsier: manifest.acconsier,
+          numvoyage: manifest.numvoyage,
+          heurearrive: manifest.heurearrive,
+          datedepart: manifest.datedepart,
+          datearrive: manifest.datearrive,
+          lieudepart: manifest.lieudepart,
+          destination: manifest.destination,
+          code: manifest.code,
+          nom: manifest.nom,
+          adresse: manifest.adresse,
+          modetransport: manifest.modetransport,
+          identificationnavire: manifest.identificationnavire,
+          paystransporteur: manifest.paystransporteur,
+          placetransporteur: manifest.placetransporteur,
+          decharger: manifest.decharger,
+          nomconducteur: manifest.nomconducteur,
+          nomconducteur2: manifest.nomconducteur2,
+          nomconducteur3: manifest.nomconducteur3,
+          rerfimmatriculation: manifest.rerfimmatriculation,
+          dateimmatriculation: manifest.dateimmatriculation,
+          tonnagebrut: manifest.tonnagebrut,
+          nembretitre: manifest.nembretitre,
+          nembrecolis: manifest.nembrecolis,
+          nembreconteneur: manifest.nembreconteneur,
+        }));
+        console.log(this.manifests);
+      },
+      (error: any) => {
+        console.error('Failed to fetch users', error);
+      }
+    );
+  }
+  
 
     myFunction() {
       (async () => {
@@ -51,18 +92,3 @@ export class AdministrationConsignateurComponent {
 
   }
 
-  export interface Element {
-    Dossier: string;
-    Voyage: string;
-    Charger: string;
-    Depart: string;
-    Arrivee: string;
-    Dated: string;
-    DateA: string;
-    Envoyer: string;
-  }
-
-  const ELEMENT_DATA: Element[] = [
-    { Dossier: 'Hydrogen',Voyage: 'Hydrogen',Charger: 'Hydrogen',Depart: 'Hydrogen',Arrivee: 'Hydrogen',Dated: 'Hydrogen',DateA: 'Hydrogen',Envoyer: 'Hydrogen',}
-  ];
-  

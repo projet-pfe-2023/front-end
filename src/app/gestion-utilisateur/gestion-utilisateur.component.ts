@@ -36,7 +36,7 @@ export class GestionUtilisateurComponent implements OnInit {
   private getusers(): void {
     this.userservice.getAllusers().subscribe(
       (users: User[]) => {
-        // Map the returned array of users to the User interface
+        
         this.users = users.map((user: User) => ({
           id: user.id,
           firstname: user.firstname,

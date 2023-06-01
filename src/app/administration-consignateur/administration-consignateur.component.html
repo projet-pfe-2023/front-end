@@ -2,66 +2,48 @@
 <body>
   <div style="margin: 2%;" class="card">
     <div class="card-header">
-      <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2" (click)="openXl(content)" >Nouveau manifest </button>
-      </a>
+      <nav class="nav">
+        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil-consignateur">Accueil</a>
+        <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
+          <button  class="btn btn-primary btn-sm" (click)="openXl(content)" style="padding: 10px;">Nouveau manifest </button>
+        </a>
+        <button type="button" style="margin:10px;" (click)="myFunction()" class="btn btn-primary">Charger manifest</button>
+      </nav>
+
       
-      <button type="button" style="margin-left: 20px;" (click)="myFunction()" class="btn btn-primary">Charger manifest</button>
+      
+      
     </div>
     <div class="card-body">
-      <div class="example-container mat-elevation-z8">
-        <mat-table #table [dataSource]="dataSource">
-      
-          <ng-container matColumnDef="Dossier">
-            <mat-header-cell *matHeaderCellDef> No.Dossier </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Dossier}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="Voyage">
-            <mat-header-cell *matHeaderCellDef> No.Voyage </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Voyage}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="Charger">
-            <mat-header-cell *matHeaderCellDef> Charger le </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Charger}} </mat-cell>
-          </ng-container>
-      
-          <ng-container matColumnDef="Depart">
-            <mat-header-cell *matHeaderCellDef> Depart </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Depart}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="Arrivee">
-            <mat-header-cell *matHeaderCellDef> Arrivee </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Arrivee}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="Dated">
-            <mat-header-cell *matHeaderCellDef> Date de depart </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Dated}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="DateA">
-            <mat-header-cell *matHeaderCellDef> Date d'arrivee </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.DateA}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="Envoyer">
-            <mat-header-cell *matHeaderCellDef> Envoyer le </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.Envoyer}} </mat-cell>
-          </ng-container>
-      
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-        
-          <mat-paginator #paginator
-                        [pageSize]="10"
-                        [pageSizeOptions]="[5, 10, 20]"
-                        [showFirstLastButtons]="true">
-          </mat-paginator>
+      <div class="e-table">
+        <div class="table-responsive table-lg mt-3">
+          <table>
+            <thead>
+              <tr>
+                <th>N.Dossier</th>
+                <th class="max-width">N.Voyage</th>
+                <th class="sortable">Charger le</th>
+                <th>Depart</th>
+                <th>Arrivée</th>
+                <th>Date départ</th>
+                <th>Date d'arrivée</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let manifest of manifests">
+                <td class="text-nowrap align-middle">{{manifest.id}}</td>
+                <td class="text-nowrap align-middle">{{manifest.numvoyage}}</td>
+                <td class="text-nowrap align-middle">{{manifest.decharger}}</td>
+                <td class="text-nowrap align-middle">{{manifest.lieudepart}}</td>
+                <td class="text-nowrap align-middle">{{manifest.destination}}</td>
+                <td class="text-nowrap align-middle">{{manifest.datedepart}}</td>
+                <td class="text-nowrap align-middle">{{manifest.datearrive}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
           
     </div>
   </div>
@@ -87,9 +69,9 @@
     <div class="modal-body">
       <router-outlet></router-outlet>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
+    
   </ng-template>
+
+  
    
 </body>

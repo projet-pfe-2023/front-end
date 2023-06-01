@@ -1,297 +1,285 @@
-<form class="reg-form" [formGroup]="generalform">
-    <h2 class="title">Bureau</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="bureau" >Bureau de douane</label>
-            <input  type="text"  class="form-control" formControlName="bureau" id="bureau">
-            <div
-                *ngIf="generalform.get('bureau')?.invalid && generalform.get('bureau')?.touched">
-                <small
-                *ngIf="generalform.get('bureau')?.invalid && generalform.get('bureau')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
 
-        <div class="col-md-6">
-            <label for="douala-nature" >Douala Port Nature</label>
-            <select class="form-control" >
-                <option value="import">import</option>
-            </select>
-        </div>
-
-        <div class="col-md-6">
-            <label for="acconsier">Acconsier</label>
-            <input  type="text" class="form-control" formControlName="acconsier" id="acconsier">
-            <div
-                *ngIf="generalform.get('acconsier')?.invalid && generalform.get('acconsier')?.touched">
-                <small
-                *ngIf="generalform.get('acconsier')?.invalid && generalform.get('acconsier')?.touched"
-                class="text-danger"  > *Leave type is required</small>
-            </div>
-        </div>
-    </div>
-
-    <h2 class="title" style="padding-top: 15px;">Voyage</h2>
+<div class="modal-body">
+    <form #Generalform="ngForm" class="reg-form" [formGroup]="generalform" (submit)="addManifest()">
+        <h2 class="title">Bureau</h2>
         <div class="row">
             <div class="col-md-6">
-                <label for="numvoyage" >Numéro de voyage</label>
-                <input  type="text" class="form-control" formControlName="numvoyage" id="numvoyage">
-                <div
-                    *ngIf="generalform.get('numvoyage')?.invalid && generalform.get('numvoyage')?.touched">
-                    <small
-                    *ngIf="generalform.get('numvoyage')?.invalid && generalform.get('numvoyage')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="bureau">Bureau de douane</label>
+                <input type="text" class="form-control" formControlName="bureau" [(ngModel)]="manifest.bureau"
+                    id="bureau">
+                <div *ngIf="generalform.get('bureau')?.invalid && generalform.get('bureau')?.touched">
+                    <small *ngIf="generalform.get('bureau')?.invalid && generalform.get('bureau')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="heurearrivee" >Heure d'arrivée</label>
-                <input  type="text" class="form-control" formControlName="heurearrivee" id="heurearrivee">
-                <div
-                    *ngIf="generalform.get('heurearrivee')?.invalid && generalform.get('heurearrivee')?.touched">
-                    <small
-                    *ngIf="generalform.get('heurearrivee')?.invalid && generalform.get('heurearrivee')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
-                </div>
+                <label for="douala-nature">Douala Port Nature</label>
+                <select class="form-control">
+                    <option value="import">import</option>
+                </select>
             </div>
 
             <div class="col-md-6">
-                <label for="datedepart" >Date de départ</label>
-                <input  type="date" class="form-control" formControlName="datedepart" id="datedepart">
-                <div
-                    *ngIf="generalform.get('datedepart')?.invalid && generalform.get('datedepart')?.touched">
-                    <small
-                    *ngIf="generalform.get('datedepart')?.invalid && generalform.get('datedepart')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <label for="datearrivee" >Date d'arrivée</label>
-                <input  type="date" class="form-control" formControlName="datearrivee" id="datearrivee">
-                <div
-                    *ngIf="generalform.get('datearrivee')?.invalid && generalform.get('datearrivee')?.touched">
-                    <small
-                    *ngIf="generalform.get('datearrivee')?.invalid && generalform.get('datearrivee')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <label for="lieudepart" >Lieu de depart</label>
-                <input  type="text" class="form-control" formControlName="lieudepart" id="lieudepart">
-                <div
-                    *ngIf="generalform.get('lieudepart')?.invalid && generalform.get('lieudepart')?.touched">
-                    <small
-                    *ngIf="generalform.get('lieudepart')?.invalid && generalform.get('lieudepart')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <label for="destination" >Destination</label>
-                <input  type="text" class="form-control" formControlName="destination" id="destination">
-                <div
-                    *ngIf="generalform.get('destination')?.invalid && generalform.get('destination')?.touched">
-                    <small
-                    *ngIf="generalform.get('destination')?.invalid && generalform.get('destination')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="acconsier">Acconsier</label>
+                <input type="text" class="form-control" formControlName="acconsier" [(ngModel)]="manifest.acconsier"
+                    id="acconsier">
+                <div *ngIf="generalform.get('acconsier')?.invalid && generalform.get('acconsier')?.touched">
+                    <small *ngIf="generalform.get('acconsier')?.invalid && generalform.get('acconsier')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
         </div>
 
-    <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <h2 class="title" style="padding-top: 15px;">Voyage</h2>
         <div class="row">
             <div class="col-md-6">
-                <label for="code" >Code</label>
-                <input  type="text" class="form-control" formControlName="code" id="code">
-                <div
-                    *ngIf="generalform.get('code')?.invalid && generalform.get('code')?.touched">
-                    <small
-                    *ngIf="generalform.get('code')?.invalid && generalform.get('code')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="numvoyage">Numéro de voyage</label>
+                <input type="text" class="form-control" formControlName="numvoyage" [(ngModel)]="manifest.numvoyage"
+                    id="numvoyage">
+                <div *ngIf="generalform.get('numvoyage')?.invalid && generalform.get('numvoyage')?.touched">
+                    <small *ngIf="generalform.get('numvoyage')?.invalid && generalform.get('numvoyage')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <label for="datedepart">Date de départ</label>
+                <input type="date" class="form-control" formControlName="datedepart" [(ngModel)]="manifest.datedepart"
+                    id="datedepart">
+                <div *ngIf="generalform.get('datedepart')?.invalid && generalform.get('datedepart')?.touched">
+                    <small *ngIf="generalform.get('datedepart')?.invalid && generalform.get('datedepart')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <label for="lieudepart">Lieu de depart</label>
+                <input type="text" class="form-control" formControlName="lieudepart" [(ngModel)]="manifest.lieudepart"
+                    id="lieudepart">
+                <div *ngIf="generalform.get('lieudepart')?.invalid && generalform.get('lieudepart')?.touched">
+                    <small *ngIf="generalform.get('lieudepart')?.invalid && generalform.get('lieudepart')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="nom" >Nom</label>
-                <input  type="text" class="form-control" formControlName="nom" id="nom">
-                <div
-                    *ngIf="generalform.get('nom')?.invalid && generalform.get('nom')?.touched">
-                    <small
-                    *ngIf="generalform.get('nom')?.invalid && generalform.get('nom')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="destination">Destination</label>
+                <input type="text" class="form-control" formControlName="destination" [(ngModel)]="manifest.destination"
+                    id="destination">
+                <div *ngIf="generalform.get('destination')?.invalid && generalform.get('destination')?.touched">
+                    <small *ngIf="generalform.get('destination')?.invalid && generalform.get('destination')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="adresse" >Adresse</label>
-                <input  type="text" class="form-control" formControlName="adresse" id="adresse">
-                <div
-                    *ngIf="generalform.get('adresse')?.invalid && generalform.get('adresse')?.touched">
-                    <small
-                    *ngIf="generalform.get('adresse')?.invalid && generalform.get('adresse')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="datearrive">Date de d'arrive</label>
+                <input type="date" class="form-control" formControlName="datearrive" [(ngModel)]="manifest.datearrive"
+                    id="datearrive">
+                <div *ngIf="generalform.get('datearrive')?.invalid && generalform.get('datearrive')?.touched">
+                    <small *ngIf="generalform.get('datearrive')?.invalid && generalform.get('datearrive')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="code">Code</label>
+                <input type="text" class="form-control" formControlName="code" [(ngModel)]="manifest.code" id="code">
+                <div *ngIf="generalform.get('code')?.invalid && generalform.get('code')?.touched">
+                    <small *ngIf="generalform.get('code')?.invalid && generalform.get('code')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control" formControlName="nom" [(ngModel)]="manifest.nom" id="nom">
+                <div *ngIf="generalform.get('nom')?.invalid && generalform.get('nom')?.touched">
+                    <small *ngIf="generalform.get('nom')?.invalid && generalform.get('nom')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="adresse">Adresse</label>
+                <input type="text" class="form-control" formControlName="adresse" [(ngModel)]="manifest.adresse"
+                    id="adresse">
+                <div *ngIf="generalform.get('adresse')?.invalid && generalform.get('adresse')?.touched">
+                    <small *ngIf="generalform.get('adresse')?.invalid && generalform.get('adresse')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
         </div>
 
-    <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <h2 class="title" style="padding-top: 15px;">Navire</h2>
         <div class="row">
             <div class="col-md-6">
-                <label for="mode-transport" >Mode de transport</label>
-                <select class="form-control" >
+                <label for="mode-transport">Mode de transport</label>
+                <select class="form-control">
                     <option value="transport-maritine">Transport maritine</option>
                 </select>
             </div>
 
             <div class="col-md-6">
-                <label for="idnavire" >Identification du navire</label>
-                <input  type="text" class="form-control" formControlName="idnavire" id="idnavire">
+                <label for="identificationnavire">Identification du navire</label>
+                <input type="text" class="form-control" formControlName="identificationnavire"
+                    [(ngModel)]="manifest.identificationnavire" id="identificationnavire">
                 <div
-                    *ngIf="generalform.get('idnavire')?.invalid && generalform.get('idnavire')?.touched">
+                    *ngIf="generalform.get('identificationnavire')?.invalid && generalform.get('identificationnavire')?.touched">
                     <small
-                    *ngIf="generalform.get('idnavire')?.invalid && generalform.get('idnavire')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('identificationnavire')?.invalid && generalform.get('identificationnavire')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="paystransporteur" >Pays du transporteur</label>
-                <input  type="text" class="form-control" formControlName="paystransporteur" id="paystransporteur">
+                <label for="paystransporteur">Pays du transporteur</label>
+                <input type="text" class="form-control" formControlName="paystransporteur"
+                    [(ngModel)]="manifest.paystransporteur" id="paystransporteur">
                 <div
                     *ngIf="generalform.get('paystransporteur')?.invalid && generalform.get('paystransporteur')?.touched">
                     <small
-                    *ngIf="generalform.get('paystransporteur')?.invalid && generalform.get('paystransporteur')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('paystransporteur')?.invalid && generalform.get('paystransporteur')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="placetransporteur" >Place du transporteur</label>
-                <input  type="text" class="form-control" formControlName="placetransporteur" id="placetransporteur">
+                <label for="placetransporteur">Place du transporteur</label>
+                <input type="text" class="form-control" formControlName="placetransporteur"
+                    [(ngModel)]="manifest.placetransporteur" id="placetransporteur">
                 <div
                     *ngIf="generalform.get('placetransporteur')?.invalid && generalform.get('placetransporteur')?.touched">
                     <small
-                    *ngIf="generalform.get('placetransporteur')?.invalid && generalform.get('placetransporteur')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('placetransporteur')?.invalid && generalform.get('placetransporteur')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="datedechargement" >Decharger le</label>
-                <input  type="date" class="form-control" formControlName="datedechargement" id="datedechargement">
-                <div
-                    *ngIf="generalform.get('datedechargement')?.invalid && generalform.get('datedechargement')?.touched">
-                    <small
-                    *ngIf="generalform.get('datedechargement')?.invalid && generalform.get('datedechargement')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="decharger">Decharger le</label>
+                <input type="date" class="form-control" formControlName="decharger" [(ngModel)]="manifest.decharger"
+                    id="decharger">
+                <div *ngIf="generalform.get('decharger')?.invalid && generalform.get('decharger')?.touched">
+                    <small *ngIf="generalform.get('decharger')?.invalid && generalform.get('decharger')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="conducteur1" >Nom conducteur</label>
-                <input  type="text" class="form-control" formControlName="conducteur1" id="conducteur1">
-                <div
-                    *ngIf="generalform.get('conducteur1')?.invalid && generalform.get('conducteur1')?.touched">
+                <label for="nomconducteur">Nom conducteur</label>
+                <input type="text" class="form-control" formControlName="nomconducteur"
+                    [(ngModel)]="manifest.nomconducteur" id="nomconducteur">
+                <div *ngIf="generalform.get('nomconducteur')?.invalid && generalform.get('nomconducteur')?.touched">
                     <small
-                    *ngIf="generalform.get('conducteur1')?.invalid && generalform.get('conducteur1')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('nomconducteur')?.invalid && generalform.get('nomconducteur')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="conducteur2" >Nom conducteur2</label>
-                <input  type="text" class="form-control" formControlName="conducteur2" id="conducteur2">
-                <div
-                    *ngIf="generalform.get('conducteur2')?.invalid && generalform.get('conducteur2')?.touched">
+                <label for="nomconducteur2">Nom conducteur2</label>
+                <input type="text" class="form-control" formControlName="nomconducteur2"
+                    [(ngModel)]="manifest.nomconducteur2" id="nomconducteur2">
+                <div *ngIf="generalform.get('nomconducteur2')?.invalid && generalform.get('nomconducteur2')?.touched">
                     <small
-                    *ngIf="generalform.get('conducteur2')?.invalid && generalform.get('conducteur2')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('nomconducteur2')?.invalid && generalform.get('nomconducteur2')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
-            </div> 
+            </div>
 
             <div class="col-md-6">
-                <label for="conducteur3" >Nom conducteur3</label>
-                <input  type="text" class="form-control" formControlName="conducteur3" id="conducteur3">
-                <div
-                    *ngIf="generalform.get('conducteur3')?.invalid && generalform.get('conducteur3')?.touched">
+                <label for="nomconducteur3">Nom conducteur3</label>
+                <input type="text" class="form-control" formControlName="nomconducteur3"
+                    [(ngModel)]="manifest.nomconducteur3" id="nomconducteur3">
+                <div *ngIf="generalform.get('nomconducteur3')?.invalid && generalform.get('nomconducteur3')?.touched">
                     <small
-                    *ngIf="generalform.get('conducteur3')?.invalid && generalform.get('conducteur3')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('nomconducteur3')?.invalid && generalform.get('nomconducteur3')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
-            </div> 
+            </div>
 
             <div class="col-md-6">
-                <label for="refimmatricule" >Ref.Immatriculation</label>
-                <input  type="text" class="form-control" formControlName="refimmatricule" id="refimmatricule">
+                <label for="rerfimmatriculation">Ref.Immatriculation</label>
+                <input type="text" class="form-control" formControlName="rerfimmatriculation"
+                    [(ngModel)]="manifest.rerfimmatriculation" id="rerfimmatriculation">
                 <div
-                    *ngIf="generalform.get('refimmatricule')?.invalid && generalform.get('refimmatricule')?.touched">
+                    *ngIf="generalform.get('rerfimmatriculation')?.invalid && generalform.get('rerfimmatriculation')?.touched">
                     <small
-                    *ngIf="generalform.get('refimmatricule')?.invalid && generalform.get('refimmatricule')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('rerfimmatriculation')?.invalid && generalform.get('rerfimmatriculation')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
-            </div> 
+            </div>
 
             <div class="col-md-6">
-                <label for="dateimmatricule" >Date Immatriculation</label>
-                <input  type="date" class="form-control" formControlName="dateimmatricule" id="dateimmatricule">
+                <label for="dateimmatriculation">Date Immatriculation</label>
+                <input type="date" class="form-control" formControlName="dateimmatriculation"
+                    [(ngModel)]="manifest.bureau" id="dateimmatriculation">
                 <div
-                    *ngIf="generalform.get('dateimmatricule')?.invalid && generalform.get('dateimmatricule')?.touched">
+                    *ngIf="generalform.get('dateimmatriculation')?.invalid && generalform.get('dateimmatriculation')?.touched">
                     <small
-                    *ngIf="generalform.get('dateimmatricule')?.invalid && generalform.get('dateimmatricule')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('dateimmatriculation')?.invalid && generalform.get('dateimmatriculation')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
         </div>
-    
-    <h2 class="title" style="padding-top: 15px;">Consignataire</h2> 
+
+        <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
         <div class="row">
             <div class="col-md-6">
-                <label for="tonnagebrut" >Tonnage brut</label>
-                <input  type="number" class="form-control" formControlName="tonnagebrut" id="tonnagebrut">
-                <div
-                    *ngIf="generalform.get('tonnagebrut')?.invalid && generalform.get('tonnagebrut')?.touched">
-                    <small
-                    *ngIf="generalform.get('tonnagebrut')?.invalid && generalform.get('tonnagebrut')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="tonnagebrut">Tonnage brut</label>
+                <input type="number" class="form-control" formControlName="tonnagebrut" [(ngModel)]="manifest.bureau"
+                    id="tonnagebrut">
+                <div *ngIf="generalform.get('tonnagebrut')?.invalid && generalform.get('tonnagebrut')?.touched">
+                    <small *ngIf="generalform.get('tonnagebrut')?.invalid && generalform.get('tonnagebrut')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="nombretitre" >Nombre de titre</label>
-                <input  type="number" class="form-control" formControlName="nombretitre" id="nombretitre">
-                <div
-                    *ngIf="generalform.get('nombretitre')?.invalid && generalform.get('nombretitre')?.touched">
-                    <small
-                    *ngIf="generalform.get('nombretitre')?.invalid && generalform.get('nombretitre')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="nembretitre">Nombre de titre</label>
+                <input type="number" class="form-control" formControlName="nembretitre"
+                    [(ngModel)]="manifest.nembretitre" id="nembretitre">
+                <div *ngIf="generalform.get('nembretitre')?.invalid && generalform.get('nembretitre')?.touched">
+                    <small *ngIf="generalform.get('nembretitre')?.invalid && generalform.get('nembretitre')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="nombrecolis" >Nombre de colis</label>
-                <input  type="number" class="form-control" formControlName="nombrecolis" id="nombrecolis">
-                <div
-                    *ngIf="generalform.get('nombrecolis')?.invalid && generalform.get('nombrecolis')?.touched">
-                    <small
-                    *ngIf="generalform.get('nombrecolis')?.invalid && generalform.get('nombrecolis')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                <label for="nembrecolis">Nombre de colis</label>
+                <input type="number" class="form-control" formControlName="nembrecolis"
+                    [(ngModel)]="manifest.nembrecolis" id="nembrecolis">
+                <div *ngIf="generalform.get('nembrecolis')?.invalid && generalform.get('nembrecolis')?.touched">
+                    <small *ngIf="generalform.get('nembrecolis')?.invalid && generalform.get('nembrecolis')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label for="nombrecontenneurs" >Nombre de contenneurs</label>
-                <input  type="number" class="form-control" formControlName="nombrecontenneurs" id="nombrecontenneurs">
-                <div
-                    *ngIf="generalform.get('nombrecontenneurs')?.invalid && generalform.get('nombrecontenneurs')?.touched">
+                <label for="nembreconteneur">Nombre de contenneurs</label>
+                <input type="number" class="form-control" formControlName="nembreconteneur"
+                    [(ngModel)]="manifest.nembreconteneur" id="nembreconteneur">
+                <div *ngIf="generalform.get('nembreconteneur')?.invalid && generalform.get('nembreconteneur')?.touched">
                     <small
-                    *ngIf="generalform.get('nombrecontenneurs')?.invalid && generalform.get('nombrecontenneurs')?.touched"
-                    class="text-danger"  > *Leave type is required</small>
+                        *ngIf="generalform.get('nembreconteneur')?.invalid && generalform.get('nembreconteneur')?.touched"
+                        class="text-danger"> *Leave type is required</small>
                 </div>
             </div>
         </div>
-        <button type="button" style="margin: 20px;" class="btn btn-primary" (click)="simpleAlert()">Enregistrer</button>
-</form>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" style="margin: 20px;" class="btn btn-primary" (click)="addManifest()">Enregistrer</button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 
-
+</div>
