@@ -39,7 +39,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form #Connaissementform="ngForm" class="reg-form" [formGroup]="connaissementform"  (submit)="addConnaissement()">
+      <form #Connaissementform="ngForm" class="reg-form" [formGroup]="connaissementform"  (ngSubmit)="addConnaissement()">
         <h2 class="title">Manifest</h2>
         <div class="row">
             <div class="col-md-6">
@@ -144,12 +144,12 @@
                 </div>
             </div> 
         </div>
-       
+        <div class="modal-footer">
+          <button type="submit"  class="btn btn-primary" >Enregistrer</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
       </form>
     </div>
-    <div class="modal-footer">
-      <button type="submit"  class="btn btn-primary" >Enregistrer</button>
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
+    
   
   </ng-template>

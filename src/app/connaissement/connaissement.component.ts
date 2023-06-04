@@ -13,12 +13,25 @@ import { FormBuilder, Validators, } from '@angular/forms';
 export class ConnaissementComponent {
   connaissements: Connaissement[] = [];
   connaissement: Connaissement = new Connaissement();
+  connaissementform: any;
 
   constructor(private modalService: NgbModal, private builder: FormBuilder, private connaissementService: ConnaissementService) { }
 
   ngOnInit(): void {
+    this.connaissementform = this.builder.group({
+      type: this.builder.control('', Validators.required),
+      numero: this.builder.control('', Validators.required),
+      nature: this.builder.control('', Validators.required),
+      lieuchargement: this.builder.control('', Validators.required),
+      lieudechargement: this.builder.control('', Validators.required),
+      colis: this.builder.control('', Validators.required),
+      nembre: this.builder.control('', Validators.required),
+      poidbrut: this.builder.control('', Validators.required),
+      volume: this.builder.control('', Validators.required),
+    });
     this.getconnaissements();
   }
+
   private getconnaissements(): void {
     this.connaissementService.getAllConnaissement().subscribe(
       (connaissements: Connaissement[]) => {
@@ -46,17 +59,7 @@ export class ConnaissementComponent {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  connaissementform = this.builder.group({
-    type: this.builder.control('', Validators.required),
-    numero: this.builder.control('', Validators.required),
-    nature: this.builder.control('', Validators.required),
-    lieuchargement: this.builder.control('', Validators.required),
-    lieudechargement: this.builder.control('', Validators.required),
-    colis: this.builder.control('', Validators.required),
-    nembre: this.builder.control('', Validators.required),
-    poidbrut: this.builder.control('', Validators.required),
-    volume: this.builder.control('', Validators.required),
-  })
+
 
 
 
@@ -67,23 +70,24 @@ export class ConnaissementComponent {
 
 
   addConnaissement() {
-    this.connaissementService.addConnaissement(this.connaissement).subscribe(
-      (Response) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'connaissement add successfully',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        console.log(Response);
-        this.connaissement = { id: 0, type: '', numero: '', nature: '', lieuchargement: '', lieudechargement: '', colis: 0, nembre: 0, poidbrut: 0, volume: 0 };
-      },
-      (error) => {
-        console.error(error);
-      });
+    if (this.connaissementform.valid) {
+      this.connaissementService.addConnaissement(this.connaissement).subscribe(
+        (Response) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'connaissement add successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          console.log(Response);
+          this.connaissement = { id: 0, type: '', numero: '', nature: '', lieuchargement: '', lieudechargement: '', colis: 0, nembre: 0, poidbrut: 0, volume: 0 };
+        },
+        (error) => {
+          console.error(error);
+        });
 
-
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 
 <div class="modal-body">
-    <form #Generalform="ngForm" class="reg-form" [formGroup]="generalform" (submit)="addManifest()">
+    <form #Generalform="ngForm" class="reg-form" [formGroup]="generalform" (ngSubmit)="addManifest()">
         <h2 class="title">Bureau</h2>
         <div class="row">
             <div class="col-md-6">
@@ -276,10 +276,9 @@
                 </div>
             </div>
         </div>
+        <div class="modal-footer">
+            <button type="submit" style="margin: 20px;" class="btn btn-primary" >Enregistrer</button>
+        </div>
     </form>
 </div>
-<div class="modal-footer">
-    <button type="submit" style="margin: 20px;" class="btn btn-primary" (click)="addManifest()">Enregistrer</button>
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 
-</div>

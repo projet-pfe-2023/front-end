@@ -33,7 +33,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form #Merchform="ngForm" class="reg-form" [formGroup]="merchform" (submit)="addMerch()">
+      <form #Merchform="ngForm" class="reg-form" [formGroup]="merchform" (ngSubmit)="addMerch()">
         <div class="row">
           <div class="col-md-6">
               <label for="marque" >Marque</label>
@@ -79,13 +79,12 @@
               </div>
           </div> 
       </div>
-
+        <div class="modal-footer">
+          <button type="submit"  class="btn btn-primary" >Enregistrer</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
       </form>
         
-
     </div>
-    <div class="modal-footer">
-      <button type="submit"  class="btn btn-primary" >Enregistrer</button>
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
+    
   </ng-template>

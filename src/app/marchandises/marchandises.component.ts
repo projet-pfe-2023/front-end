@@ -23,11 +23,11 @@ export class MarchandisesComponent implements OnInit {
   ngOnInit(): void {
 
     this.merchform = this.builder.group({
-      marque: this.builder.control('', Validators.required),
-      mass: this.builder.control('', Validators.required),
-      volume: this.builder.control('', Validators.required),
-      designation: this.builder.control('', Validators.required),
-    })
+      marque: ['', Validators.required],
+      mass: ['', Validators.required],
+      volume: ['', Validators.required],
+      designation: ['', Validators.required],
+    });
 
     this.getmerchs();
   }
@@ -58,6 +58,7 @@ export class MarchandisesComponent implements OnInit {
 
 
   addMerch() {
+    if (this.merchform.valid) {
     this.merchService.addMerch(this.merch).subscribe(
       (Response) => {
         Swal.fire({
@@ -79,6 +80,6 @@ export class MarchandisesComponent implements OnInit {
         console.error(error);
       });
 
-
+    }
   }
 }

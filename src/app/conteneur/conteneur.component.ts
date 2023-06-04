@@ -13,12 +13,22 @@ import { ConteneurService } from '../service/conteneur.service';
 export class ConteneurComponent implements OnInit {
   conteneurs: Conteneur[] = [];
   conteneur: Conteneur = new Conteneur();
+  conteneurform: any;
 
   constructor(private modalService: NgbModal, private builder: FormBuilder, private conteneurService: ConteneurService) { }
 
   ngOnInit(): void {
+    this.conteneurform = this.builder.group({
+      id: this.builder.control('', Validators.required),
+      type: this.builder.control('', Validators.required),
+      remp: this.builder.control('', Validators.required),
+      scalle: this.builder.control('', Validators.required),
+      marque: this.builder.control('', Validators.required),
+      resp: this.builder.control('', Validators.required),
+    });
     this.getconteneurs();
   }
+
   private getconteneurs(): void {
     this.conteneurService.getAllConteneur().subscribe(
       (conteneurs: Conteneur[]) => {
@@ -38,14 +48,7 @@ export class ConteneurComponent implements OnInit {
     );
   }
 
-  conteneurform = this.builder.group({
-    id: this.builder.control('', Validators.required),
-    type: this.builder.control('', Validators.required),
-    remp: this.builder.control('', Validators.required),
-    scalle: this.builder.control('', Validators.required),
-    marque: this.builder.control('', Validators.required),
-    resp: this.builder.control('', Validators.required),
-  })
+  
 
   openLg(content: any) {
     this.modalService.open(content, { size: 'lg' });
@@ -58,6 +61,7 @@ export class ConteneurComponent implements OnInit {
 
 
   addConteneur() {
+    if(this.conteneurform.valid){
     this.conteneurService.addConteneur(this.conteneur).subscribe(
       (Response) => {
         Swal.fire({
@@ -73,7 +77,7 @@ export class ConteneurComponent implements OnInit {
       (error) => {
         console.error(error);
       });
-
+    }
 
   }
 }
