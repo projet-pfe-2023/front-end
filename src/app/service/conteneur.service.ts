@@ -10,7 +10,7 @@ import { Observable, map, of, throwError } from 'rxjs';
 export class ConteneurService{
 
   private apiURL = 'http://localhost:8080/api/test/Conteneur';
-  baseURL: any;
+ 
 
   constructor(private httpClient:HttpClient) { }
 

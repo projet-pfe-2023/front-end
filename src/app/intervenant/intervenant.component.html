@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="nom" >Nom</label>
-                <input  type="text" class="form-control" formControlName="nom" [(ngModel)]="intervenant.nom" id="nom">
+                <input  type="text" class="form-control" formControlName="nom" [(ngModel)]="intervenant.nom" id="nom" required>
                 <div
                     *ngIf="intervenantform.get('nom')?.invalid && intervenantform.get('nom')?.touched">
                     <small
@@ -55,7 +55,7 @@
 
             <div class="col-md-6">
                 <label for="adresse" >Adresse</label>
-                <input  type="text" class="form-control" formControlName="adresse" [(ngModel)]="intervenant.adresse" id="adresse">
+                <input  type="text" class="form-control" formControlName="adresse" [(ngModel)]="intervenant.adresse" id="adresse" required>
                 <div
                     *ngIf="intervenantform.get('adresse')?.invalid && intervenantform.get('adresse')?.touched">
                     <small
@@ -68,7 +68,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="numerocontribuable" >Numéro contribuable</label>
-                <input  type="text" class="form-control" formControlName="numerocontribuable" [(ngModel)]="intervenant.numerocontribuable" id="numerocontribuable">
+                <input  type="text" class="form-control" formControlName="numerocontribuable" [(ngModel)]="intervenant.numerocontribuable" id="numerocontribuable" required>
                 <div
                     *ngIf="intervenantform.get('numerocontribuable')?.invalid && intervenantform.get('numerocontribuable')?.touched">
                     <small
@@ -79,7 +79,7 @@
 
             <div class="col-md-6">
                 <label for="nom2" >Nom</label>
-                <input  type="text" class="form-control" formControlName="nom2" [(ngModel)]="intervenant.nom2" id="nom2">
+                <input  type="text" class="form-control" formControlName="nom2" [(ngModel)]="intervenant.nom2" id="nom2" required>
                 <div
                     *ngIf="intervenantform.get('nom2')?.invalid && intervenantform.get('nom2')?.touched">
                     <small
@@ -90,7 +90,7 @@
 
             <div class="col-md-6">
                 <label for="telephone" >Telephone</label>
-                <input  type="text" class="form-control" formControlName="telephone" [(ngModel)]="intervenant.telephone" id="telephone">
+                <input  type="text" class="form-control" formControlName="telephone" [(ngModel)]="intervenant.telephone" id="telephone" required>
                 <div
                     *ngIf="intervenantform.get('telephone')?.invalid && intervenantform.get('telephone')?.touched">
                     <small
@@ -101,7 +101,7 @@
 
             <div class="col-md-6">
                 <label for="email" >Email</label>
-                <input  type="email" class="form-control" formControlName="email" [(ngModel)]="intervenant.email" id="email">
+                <input  type="email" class="form-control" formControlName="email" [(ngModel)]="intervenant.email" id="email" required>
                 <div
                     *ngIf="intervenantform.get('email')?.invalid && intervenantform.get('email')?.touched">
                     <small
@@ -112,7 +112,7 @@
 
             <div class="col-md-6">
                 <label for="adresse2" >Adresse</label>
-                <input  type="text" class="form-control" formControlName="adresse2" [(ngModel)]="intervenant.adresse2" id="adresse2">
+                <input  type="text" class="form-control" formControlName="adresse2" [(ngModel)]="intervenant.adresse2" id="adresse2" required>
                 <div
                     *ngIf="intervenantform.get('adresse2')?.invalid && intervenantform.get('adresse2')?.touched">
                     <small

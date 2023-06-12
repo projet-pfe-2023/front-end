@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Manifest } from '../manifest';
 import { ManifestService } from '../service/manifest.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from '../user';
+
 
 @Component({
   selector: 'app-form-manifest',
@@ -15,15 +17,23 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class FormManifestComponent implements OnInit {
   manifests: Manifest[] = [];
   manifest: Manifest = new Manifest();
-  generalform: any;
-  
+  user: User = new User();
+  users: User[] = [];
+  generalform!: FormGroup;
+  requestBody!: Manifest;
+ 
   
 
-  constructor(private builder: FormBuilder, private manifestService: ManifestService, 
-    private router:Router,private modalService: NgbModal, public modal: NgbActiveModal) { }
+  constructor(private builder: FormBuilder, private manifestService: ManifestService,
+    private router: Router, private modalService: NgbModal, public modal: NgbActiveModal, private route: ActivatedRoute) { }
+
   ngOnInit(): void {
+   
+    
+        
     this.generalform = this.builder.group({
       bureau: this.builder.control('', Validators.required),
+      douala: this.builder.control('', Validators.required),
       acconsier: this.builder.control('', Validators.required),
       numvoyage: this.builder.control('', Validators.required),
       datedepart: this.builder.control('', Validators.required),
@@ -33,6 +43,7 @@ export class FormManifestComponent implements OnInit {
       code: this.builder.control('', Validators.required),
       nom: this.builder.control('', Validators.required),
       adresse: this.builder.control('', Validators.required),
+      modetransport: this.builder.control('', Validators.required),
       identificationnavire: this.builder.control('', Validators.required),
       paystransporteur: this.builder.control('', Validators.required),
       placetransporteur: this.builder.control('', Validators.required),
@@ -49,31 +60,29 @@ export class FormManifestComponent implements OnInit {
     });
   }
 
+
+
+
   
- 
-
-  addManifest() {
-    if(this.generalform.valid){
-    this.manifestService.addManifest(this.manifest).subscribe(
-      (Response) => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'connaissement add successfully',
-          showConfirmButton: false,
-          timer: 1500
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate(['/administration-consignateur']);
-          }
-        });
-
-      },
-      (error) => {
-        console.error(error);
-      });
+  addManifest(): void  {
+    if (this.generalform.valid) {
+      this.manifestService.addManifest(this.manifest).subscribe(
+        response => {
+            console.log('Manifest added successfully');
+            Swal.fire('Success', 'Manifest added successfully', 'success');
+            location.reload();
+        },
+        error => {
+          console.error('Failed to add manifest:', error);
+          Swal.fire('Error', 'Failed to add manifest', 'error');
+        }
+      );
+    }
   }
+  
 
 }
 
-}
+
+
+

@@ -3,10 +3,9 @@
     <div style="margin: 2%;" class="card">
       <div class="card-header">
          <nav class="nav">
-          <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil-douane">Accueil</a>
-          <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="consultation" routerLinkActive="active" >Consultation</a>
-          <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="gestion-role" routerLinkActive="active" >Demande de modefication</a>
-          <button class="btn btn-primary btn-sm" style="margin: 10px;" *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button>
+          <button class="btn btn-primary btn-lg" style="margin: 10px;" (click)="douane()">Accueil</button>
+          <button class="btn btn-primary btn-lg" style="margin: 10px;" (click)="consultation()">Consulter</button>
+          <button class="btn btn-primary btn-lg" style="margin: 10px;" *ngIf="isLoggedIn()" (click)="logout()">Déconnexion</button>
         </nav>
       </div>
       <div class="card-body">

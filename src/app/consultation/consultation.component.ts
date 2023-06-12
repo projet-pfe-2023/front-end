@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Manifest} from '../manifest';
 import {ManifestService} from '../service/manifest.service' ;
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DouaneService } from '../service/douane.service';
 
 @Component({
   selector: 'app-consultation',
@@ -11,25 +12,26 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ConsultationComponent {
   manifests: Manifest[] = [];
   manifest: Manifest = new Manifest();
+  isRequestAccepted: boolean = false;
+  isRequestRejected: boolean = true;
+  manifestId!: number;
 
-  constructor(private manifestService: ManifestService,private modalService: NgbModal){}
+  constructor(private manifestService: ManifestService,private modalService: NgbModal,private douaneservice: DouaneService){}
   openXl(content: any) {
 		this.modalService.open(content, { size: 'xl' });
 	}
   ngOnInit(): void {
     this.getmanifests();
   }
-  private getmanifests(): void{
+  private getmanifests(): void {
     this.manifestService.getAllManifest().subscribe(
       (manifests: Manifest[]) => {
-        // Map the returned array of users to the User interface
         this.manifests = manifests.map((manifest: Manifest) => ({
           id: manifest.id,
           bureau: manifest.bureau,
           douala: manifest.douala,
           acconsier: manifest.acconsier,
           numvoyage: manifest.numvoyage,
-          heurearrive: manifest.heurearrive,
           datedepart: manifest.datedepart,
           datearrive: manifest.datearrive,
           lieudepart: manifest.lieudepart,
@@ -51,6 +53,9 @@ export class ConsultationComponent {
           nembretitre: manifest.nembretitre,
           nembrecolis: manifest.nembrecolis,
           nembreconteneur: manifest.nembreconteneur,
+          status: manifest.status,
+          user: manifest.user,
+          
         }));
         console.log(this.manifests);
       },
@@ -59,4 +64,35 @@ export class ConsultationComponent {
       }
     );
   }
+
+  acceptManifest(manifestId: number): void {
+    this.douaneservice.acceptManifest(manifestId)
+      .subscribe(
+        response => {
+          console.log('Manifest accepted:', response);
+          this.isRequestAccepted = true; 
+          location.reload();
+        },
+        error => {
+          console.error('Failed to accept manifest:', error);
+        }
+      );
+  }
+
+  rejectManifest(manifestId: number): void {
+    this.douaneservice.rejectManifest(manifestId)
+      .subscribe(
+        response => {
+          console.log('Manifest rejected:', response);
+          this.isRequestRejected = false; 
+          location.reload();
+        },
+        error => {
+          console.error('Failed to reject manifest:', error);
+          
+        }
+      );
+  }
+
+
 }

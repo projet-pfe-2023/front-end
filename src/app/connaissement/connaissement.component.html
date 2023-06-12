@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="type" >Type T/T</label>
-                <input  type="text" class="form-control" formControlName="type" [(ngModel)]="connaissement.type" id="type">
+                <input  type="text" class="form-control" formControlName="type" [(ngModel)]="connaissement.type" id="type" required>
                 <div
                     *ngIf="connaissementform.get('type')?.invalid && connaissementform.get('type')?.touched">
                     <small
@@ -55,7 +55,7 @@
 
             <div class="col-md-6">
                 <label for="numero" >Numero T/T</label>
-                <input  type="text" class="form-control" formControlName="numero" [(ngModel)]="connaissement.numero" id="numero">
+                <input  type="text" class="form-control" formControlName="numero" [(ngModel)]="connaissement.numero" id="numero" required>
                 <div
                     *ngIf="connaissementform.get('numero')?.invalid && connaissementform.get('numero')?.touched">
                     <small
@@ -66,7 +66,7 @@
 
             <div class="col-md-6">
                 <label for="nature" >Nature</label>
-                <input  type="text" class="form-control" formControlName="nature"  [(ngModel)]="connaissement.nature" id="nature">
+                <input  type="text" class="form-control" formControlName="nature"  [(ngModel)]="connaissement.nature" id="nature" required>
                 <div
                     *ngIf="connaissementform.get('nature')?.invalid && connaissementform.get('nature')?.touched">
                     <small
@@ -77,7 +77,7 @@
 
             <div class="col-md-6">
                 <label for="lieuchargement" >Lieu de chargement</label>
-                <input  type="text" class="form-control" formControlName="lieuchargement" [(ngModel)]="connaissement.lieuchargement" id="lieuchargement">
+                <input  type="text" class="form-control" formControlName="lieuchargement" [(ngModel)]="connaissement.lieuchargement" id="lieuchargement" required>
                 <div
                     *ngIf="connaissementform.get('lieuchargement')?.invalid && connaissementform.get('lieuchargement')?.touched">
                     <small
@@ -88,7 +88,7 @@
 
             <div class="col-md-6">
                 <label for="lieudechargement" >Lieu d'echargement</label>
-                <input  type="text" class="form-control" formControlName="lieudechargement" [(ngModel)]="connaissement.lieudechargement" id="lieudechargement">
+                <input  type="text" class="form-control" formControlName="lieudechargement" [(ngModel)]="connaissement.lieudechargement" id="lieudechargement" required>
                 <div
                     *ngIf="connaissementform.get('lieudechargement')?.invalid && connaissementform.get('lieudechargement')?.touched">
                     <small
@@ -102,7 +102,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="colis" >Colis</label>
-                <input  type="number" class="form-control" formControlName="colis" [(ngModel)]="connaissement.colis" id="colis">
+                <input  type="number" class="form-control" formControlName="colis" [(ngModel)]="connaissement.colis" id="colis" required>
                 <div
                     *ngIf="connaissementform.get('colis')?.invalid && connaissementform.get('colis')?.touched">
                     <small
@@ -113,7 +113,7 @@
 
             <div class="col-md-6">
                 <label for="nembre" >Nombre de conteneurs</label>
-                <input  type="number" class="form-control" formControlName="nembre" [(ngModel)]="connaissement.nembre" id="nembre">
+                <input  type="number" class="form-control" formControlName="nembre" [(ngModel)]="connaissement.nembre" id="nembre" required>
                 <div
                     *ngIf="connaissementform.get('nembre')?.invalid && connaissementform.get('nembre')?.touched">
                     <small
@@ -124,7 +124,7 @@
 
             <div class="col-md-6">
                 <label for="poidbrut" >Poids Brut(Kg) </label>
-                <input  type="text" class="form-control" formControlName="poidbrut" [(ngModel)]="connaissement.poidbrut" id="poidbrut">
+                <input  type="text" class="form-control" formControlName="poidbrut" [(ngModel)]="connaissement.poidbrut" id="poidbrut" required>
                 <div
                     *ngIf="connaissementform.get('poidbrut')?.invalid && connaissementform.get('poidbrut')?.touched">
                     <small
@@ -135,7 +135,7 @@
 
             <div class="col-md-6">
                 <label for="volume" >Volume </label>
-                <input  type="text" class="form-control" formControlName="volume" [(ngModel)]="connaissement.volume" id="volume">
+                <input  type="text" class="form-control" formControlName="volume" [(ngModel)]="connaissement.volume" id="volume" required>
                 <div
                     *ngIf="connaissementform.get('volume')?.invalid && connaissementform.get('volume')?.touched">
                     <small

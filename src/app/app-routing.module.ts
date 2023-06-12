@@ -27,23 +27,23 @@ const routes: Routes = [
   {path:'accueil',component:AccueilComponent,canActivate:[AuthGuard]}, 
   {path:'administration',component:AdministrationComponent,canActivate:[AuthGuard],
   children:[
-    {path:'gestion-utilisateur/:id',component:GestionUtilisateurComponent},
-    {path:'gestion-role',component:GestionRoleComponent},
-    {path: 'create-user', component:CreateUserComponent},  
+    {path:'gestion-utilisateur/:id',component:GestionUtilisateurComponent,canActivate:[AuthGuard]},
+    {path:'gestion-role',component:GestionRoleComponent,canActivate:[AuthGuard]},
+    {path: 'create-user', component:CreateUserComponent,canActivate:[AuthGuard]},  
   ]},
   {path:'accueil-consignateur',component:AccueilConsignateurComponent,canActivate:[AuthGuard]},
-  {path:'administration-consignateur',component:AdministrationConsignateurComponent,
+  {path:'administration-consignateur',component:AdministrationConsignateurComponent,canActivate:[AuthGuard],
   children:[
-    {path:'form-manifest',component:FormManifestComponent},
-    {path:'connaissement',component:ConnaissementComponent},
-    {path:'intervenant',component:IntervenantComponent},
-    {path:'marchandises',component:MarchandisesComponent},
-    {path:'conteneur',component:ConteneurComponent}
+    {path:'form-manifest',component:FormManifestComponent,canActivate:[AuthGuard]},
+    {path:'connaissement',component:ConnaissementComponent,canActivate:[AuthGuard]},
+    {path:'intervenant',component:IntervenantComponent,canActivate:[AuthGuard]},
+    {path:'marchandises',component:MarchandisesComponent,canActivate:[AuthGuard]},
+    {path:'conteneur',component:ConteneurComponent,canActivate:[AuthGuard]}
   ]},
   {path:'accueil-douane',component:AccueilDouaneComponent,canActivate:[AuthGuard]},
   {path:'administration-douane',component:AdministrationDouaneComponent,canActivate:[AuthGuard],
   children:[
-    {path:'consultation',component:ConsultationComponent},
+    {path:'consultation',component:ConsultationComponent,canActivate:[AuthGuard]},
   ]},
   
 ];

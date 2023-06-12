@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import { FormBuilder, Validators, } from '@angular/forms';
+import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { Merch } from '../merch';
 import { MerchService } from '../service/merch.service';
 import { Router } from '@angular/router';
@@ -16,7 +14,7 @@ import { Router } from '@angular/router';
 export class MarchandisesComponent implements OnInit {
   merchs: Merch[] = [];
   merch: Merch = new Merch();
-  merchform: any;
+  merchform!: FormGroup;
 
   constructor(private modalService: NgbModal, private builder: FormBuilder, private merchService: MerchService,private router: Router) { }
 

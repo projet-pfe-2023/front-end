@@ -3,7 +3,7 @@ import { Connaissement } from '../connaissement';
 import { ConnaissementService } from '../service/connaissement.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import { FormBuilder, Validators, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
 @Component({
   selector: 'app-connaissement',
@@ -13,7 +13,7 @@ import { FormBuilder, Validators, } from '@angular/forms';
 export class ConnaissementComponent {
   connaissements: Connaissement[] = [];
   connaissement: Connaissement = new Connaissement();
-  connaissementform: any;
+  connaissementform!: FormGroup;
 
   constructor(private modalService: NgbModal, private builder: FormBuilder, private connaissementService: ConnaissementService) { }
 

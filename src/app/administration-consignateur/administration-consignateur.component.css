@@ -1,14 +1,29 @@
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.pending-row {
+  background-color: #eedcdc;
+
+}
+
+.accepted-row {
+  background-color: #ccffcc;
+
+}
+
+.rejected-row {
+  background-color: red;
+}

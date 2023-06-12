@@ -37,7 +37,7 @@
         <div class="row">
           <div class="col-md-6">
               <label for="marque" >Marque</label>
-              <input  type="text" class="form-control" formControlName="marque" [(ngModel)]="merch.marque" id="marque">
+              <input  type="text" class="form-control" formControlName="marque" [(ngModel)]="merch.marque" id="marque" required>
               <div
                   *ngIf="merchform.get('marque')?.invalid && merchform.get('marque')?.touched">
                   <small
@@ -48,7 +48,7 @@
 
           <div class="col-md-6">
               <label for="mass" >Poid</label>
-              <input  type="text" class="form-control" formControlName="mass" [(ngModel)]="merch.mass" id="mass">
+              <input  type="text" class="form-control" formControlName="mass" [(ngModel)]="merch.mass" id="mass" required>
               <div
                   *ngIf="merchform.get('mass')?.invalid && merchform.get('mass')?.touched">
                   <small
@@ -59,7 +59,7 @@
 
           <div class="col-md-6">
               <label for="volume" >Volume</label>
-              <input  type="text" class="form-control" formControlName="volume" [(ngModel)]="merch.volume" id="volume">
+              <input  type="text" class="form-control" formControlName="volume" [(ngModel)]="merch.volume" id="volume" required>
               <div
                   *ngIf="merchform.get('volume')?.invalid && merchform.get('volume')?.touched">
                   <small
@@ -70,7 +70,7 @@
 
           <div class="col-md-6">
               <label for="designation" >Designation</label>
-              <input  type="text" class="form-control" formControlName="designation" [(ngModel)]="merch.designation" id="designation">
+              <input  type="text" class="form-control" formControlName="designation" [(ngModel)]="merch.designation" id="designation" required>
               <div
                   *ngIf="merchform.get('designation')?.invalid && merchform.get('designation')?.touched">
                   <small

@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="id" >Identification</label>
-                <input  type="text" class="form-control" formControlName="id" [(ngModel)]="conteneur.id" id="id">
+                <input  type="text" class="form-control" formControlName="id" [(ngModel)]="conteneur.id" id="id" required>
                 <div
                   *ngIf="conteneurform.get('id')?.invalid && conteneurform.get('id')?.touched">
                   <small
@@ -54,7 +54,7 @@
 
             <div class="col-md-6">
                 <label for="type" >Type</label>
-                <input  type="text" class="form-control" formControlName="type" [(ngModel)]="conteneur.type" id="type">
+                <input  type="text" class="form-control" formControlName="type" [(ngModel)]="conteneur.type" id="type" required>
                 <div
                     *ngIf="conteneurform.get('type')?.invalid && conteneurform.get('type')?.touched">
                     <small
@@ -65,7 +65,7 @@
 
             <div class="col-md-6">
                 <label for="remp" >Remp</label>
-                <input  type="text" class="form-control" formControlName="remp" [(ngModel)]="conteneur.remp" id="remp">
+                <input  type="text" class="form-control" formControlName="remp" [(ngModel)]="conteneur.remp" id="remp" required>
                 <div
                     *ngIf="conteneurform.get('remp')?.invalid && conteneurform.get('remp')?.touched">
                     <small
@@ -76,7 +76,7 @@
 
             <div class="col-md-6">
                 <label for="scalle" >Scelles</label>
-                <input  type="text" class="form-control" formControlName="scalle" [(ngModel)]="conteneur.scalle" id="scalle">
+                <input  type="text" class="form-control" formControlName="scalle" [(ngModel)]="conteneur.scalle" id="scalle" required>
                 <div
                     *ngIf="conteneurform.get('scalle')?.invalid && conteneurform.get('scalle')?.touched">
                     <small
@@ -87,7 +87,7 @@
 
             <div class="col-md-6">
               <label for="marque" >Marque</label>
-              <input  type="text" class="form-control" formControlName="marque" [(ngModel)]="conteneur.marque" id="marque">
+              <input  type="text" class="form-control" formControlName="marque" [(ngModel)]="conteneur.marque" id="marque" required>
               <div
                   *ngIf="conteneurform.get('marque')?.invalid && conteneurform.get('marque')?.touched">
                   <small
@@ -98,7 +98,7 @@
 
             <div class="col-md-6">
               <label for="resp" >Resp</label>
-              <input  type="text" class="form-control" formControlName="resp" [(ngModel)]="conteneur.resp" id="resp">
+              <input  type="text" class="form-control" formControlName="resp" [(ngModel)]="conteneur.resp" id="resp" required>
               <div
                   *ngIf="conteneurform.get('resp')?.invalid && conteneurform.get('resp')?.touched">
                   <small

@@ -20,4 +20,11 @@ export class AdministrationDouaneComponent {
     this.authService.logout();
   }
 
+  consultation(){
+    this.router.navigate(['administration-douane/consultation']);
+  }
+  douane(){
+    this.router.navigate(['/accueil-douane']);
+  }
+
 }

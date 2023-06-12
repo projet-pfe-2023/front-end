@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import { FormBuilder, Validators, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Conteneur } from '../conteneur';
 import { ConteneurService } from '../service/conteneur.service';
 
@@ -13,7 +13,7 @@ import { ConteneurService } from '../service/conteneur.service';
 export class ConteneurComponent implements OnInit {
   conteneurs: Conteneur[] = [];
   conteneur: Conteneur = new Conteneur();
-  conteneurform: any;
+  conteneurform!: FormGroup;
 
   constructor(private modalService: NgbModal, private builder: FormBuilder, private conteneurService: ConteneurService) { }
 

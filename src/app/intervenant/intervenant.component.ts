@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormBuilder, Validators, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Intervenant } from '../intervenant';
 import { IntervenantService } from '../service/intervenant.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class IntervenantComponent {
   intervenants: Intervenant[] = [];
   intervenant: Intervenant = new Intervenant();
-  intervenantform: any;
+  intervenantform!: FormGroup;
 
   constructor(private builder: FormBuilder, private intervenantService: IntervenantService, private modalService: NgbModal) { }
   ngOnInit(): void {

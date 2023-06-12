@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { DecimalPipe, NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AuthService } from '../service/auth.service';
 import { error } from 'jquery';
 import Swal from 'sweetalert2';

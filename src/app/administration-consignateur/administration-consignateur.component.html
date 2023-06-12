@@ -1,18 +1,23 @@
-<header style="background-color: rgb(0, 162, 255);"><h2 style="padding: 1%;">Administration</h2></header>
+<header style="background-color: rgb(0, 162, 255);">
+  <h2 style="padding: 1%;">Administration</h2>
+</header>
+
 <body>
   <div style="margin: 2%;" class="card">
     <div class="card-header">
       <nav class="nav">
-        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil-consignateur">Accueil</a>
+        <button class="btn btn-primary btn-lg" style="margin: 10px;" (click)="accueil()">Accueil</button>
         <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
-          <button  class="btn btn-primary btn-sm" (click)="openXl(content)" style="padding: 10px;">Nouveau manifest </button>
+          <button class="btn btn-primary btn-lg" (click)="openXl(content)" style="padding: 10px;">Nouveau manifest
+          </button>
         </a>
-        <button type="button" style="margin:10px;" (click)="myFunction()" class="btn btn-primary">Charger manifest</button>
+        <button type="button" style="margin:10px;" (click)="myFunction()" class="btn btn-primary btn-lg">Charger
+          manifest</button>
       </nav>
 
-      
-      
-      
+
+
+
     </div>
     <div class="card-body">
       <div class="e-table">
@@ -27,11 +32,13 @@
                 <th>Arrivée</th>
                 <th>Date départ</th>
                 <th>Date d'arrivée</th>
-                
+                <th>Status</th>
+
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let manifest of manifests">
+              <tr *ngFor="let manifest of manifests; let i = index"
+                [ngClass]="{'default-row': manifest.status === 'DEFAULT','pending-row': manifest.status === 'PENDING', 'accepted-row': manifest.status === 'ACCEPTED','rejected-row': manifest.status === 'REJECTED'}">
                 <td class="text-nowrap align-middle">{{manifest.id}}</td>
                 <td class="text-nowrap align-middle">{{manifest.numvoyage}}</td>
                 <td class="text-nowrap align-middle">{{manifest.decharger}}</td>
@@ -39,39 +46,256 @@
                 <td class="text-nowrap align-middle">{{manifest.destination}}</td>
                 <td class="text-nowrap align-middle">{{manifest.datedepart}}</td>
                 <td class="text-nowrap align-middle">{{manifest.datearrive}}</td>
+                <td class="text-nowrap align-middle">
+                  <button type="button" class="btn btn-info" (click)="openLg(contentupdate,i)"
+                      *ngIf="manifest.status === 'ACCEPTED'" style="margin-left: 3px; border-radius: 0.9375em;">Modifier</button>
+                    <button type="button" class="btn btn-success" *ngIf="manifest.status === 'DEFAULT' || manifest.status !== 'REJECTED' && manifest.status !== 'PENDING' && manifest.status !== 'ACCEPTED'" style="margin-left: 3px; border-radius: 0.9375em;" (click)="demandeModification(manifest.id)">demandeModification</button>
+                  </td>
+
+
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-          
+
     </div>
   </div>
-  <ng-template #content let-modal>
+  <ng-template #content let-modal >
     <div class="modal-header">
       <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2"  >Segment géneral </button>
+        <button class="btn btn-outline-primary mb-2 me-2">Segment géneral </button>
       </a>
       <a class="nav-link " routerLink="connaissement" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2"  >Connaissement </button>
+        <button class="btn btn-outline-primary mb-2 me-2">Connaissement </button>
       </a>
       <a class="nav-link " routerLink="intervenant" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2"  >Intervenant </button>
+        <button class="btn btn-outline-primary mb-2 me-2">Intervenant </button>
       </a>
       <a class="nav-link " routerLink="marchandises" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2"  >Marchandises</button>
+        <button class="btn btn-outline-primary mb-2 me-2">Marchandises</button>
       </a>
       <a class="nav-link " routerLink="conteneur" routerLinkActive="active">
-        <button  class="btn btn-outline-primary mb-2 me-2"  >Conteneur</button>
+        <button class="btn btn-outline-primary mb-2 me-2">Conteneur</button>
       </a>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      <button type="button" class="btn-close" aria-label="Close"  (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
       <router-outlet></router-outlet>
     </div>
-    
+
   </ng-template>
 
-  
-   
+  <ng-template #contentupdate let-modal let-index="index">
+
+    <div class="modal-body">
+      <form #Generalform="ngForm" class="reg-form" [formGroup]="generalform">
+        <button type="button" class="btn-close" aria-label="Close" style="margin-left: 95%;" (click)="modal.dismiss('Cross click')"></button>
+        <h2 class="title">Bureau</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="bureau">Bureau de douane</label>
+            <input type="text" class="form-control" formControlName="bureau" [(ngModel)]="manifest.bureau" id="bureau"
+              required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="douala">Douane Port Nature</label>
+            <select class="form-control" formControlName="douala" [(ngModel)]="manifest.douala" id="douala" required>
+              <option value="import">import</option>
+            </select>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="acconsier">Acconsier</label>
+            <input type="text" class="form-control" formControlName="acconsier" [(ngModel)]="manifest.acconsier"
+              id="acconsier" required>
+
+          </div>
+        </div>
+
+        <h2 class="title" style="padding-top: 15px;">Voyage</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="numvoyage">Numéro de voyage</label>
+            <input type="text" class="form-control" formControlName="numvoyage" [(ngModel)]="manifest.numvoyage"
+              id="numvoyage" required>
+
+          </div>
+
+
+
+          <div class="col-md-6">
+            <label for="datedepart">Date de départ</label>
+            <input type="date" class="form-control" formControlName="datedepart" [(ngModel)]="manifest.datedepart"
+              id="datedepart" required>
+
+          </div>
+
+
+
+          <div class="col-md-6">
+            <label for="lieudepart">Lieu de depart</label>
+            <input type="text" class="form-control" formControlName="lieudepart" [(ngModel)]="manifest.lieudepart"
+              id="lieudepart" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="destination">Destination</label>
+            <input type="text" class="form-control" formControlName="destination" [(ngModel)]="manifest.destination"
+              id="destination" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="datearrive">Date de d'arrive</label>
+            <input type="date" class="form-control" formControlName="datearrive" [(ngModel)]="manifest.datearrive"
+              id="datearrive" required>
+
+          </div>
+
+        </div>
+
+        <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="code">Code</label>
+            <input type="text" class="form-control" formControlName="code" [(ngModel)]="manifest.code" id="code"
+              required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" formControlName="nom" [(ngModel)]="manifest.nom" id="nom" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="adresse">Adresse</label>
+            <input type="text" class="form-control" formControlName="adresse" [(ngModel)]="manifest.adresse"
+              id="adresse" required>
+
+          </div>
+        </div>
+
+        <h2 class="title" style="padding-top: 15px;">Navire</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="modetransport">Mode de transport</label>
+            <select class="form-control" formControlName="modetransport" id="modetransport"
+              [(ngModel)]="manifest.modetransport" required>
+              <option value="transport-maritine">Transport maritine</option>
+            </select>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="identificationnavire">Identification du navire</label>
+            <input type="text" class="form-control" formControlName="identificationnavire"
+              [(ngModel)]="manifest.identificationnavire" id="identificationnavire" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="paystransporteur">Pays du transporteur</label>
+            <input type="text" class="form-control" formControlName="paystransporteur"
+              [(ngModel)]="manifest.paystransporteur" id="paystransporteur" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="placetransporteur">Place du transporteur</label>
+            <input type="text" class="form-control" formControlName="placetransporteur"
+              [(ngModel)]="manifest.placetransporteur" id="placetransporteur" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="decharger">Decharger le</label>
+            <input type="date" class="form-control" formControlName="decharger" [(ngModel)]="manifest.decharger"
+              id="decharger" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nomconducteur">Nom conducteur</label>
+            <input type="text" class="form-control" formControlName="nomconducteur" [(ngModel)]="manifest.nomconducteur"
+              id="nomconducteur" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nomconducteur2">Nom conducteur2</label>
+            <input type="text" class="form-control" formControlName="nomconducteur2"
+              [(ngModel)]="manifest.nomconducteur2" id="nomconducteur2" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nomconducteur3">Nom conducteur3</label>
+            <input type="text" class="form-control" formControlName="nomconducteur3"
+              [(ngModel)]="manifest.nomconducteur3" id="nomconducteur3" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="rerfimmatriculation">Ref.Immatriculation</label>
+            <input type="text" class="form-control" formControlName="rerfimmatriculation"
+              [(ngModel)]="manifest.rerfimmatriculation" id="rerfimmatriculation" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="dateimmatriculation">Date Immatriculation</label>
+            <input type="date" class="form-control" formControlName="dateimmatriculation"
+              [(ngModel)]="manifest.dateimmatriculation" id="dateimmatriculation" required>
+
+          </div>
+        </div>
+
+        <h2 class="title" style="padding-top: 15px;">Consignataire</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="tonnagebrut">Tonnage brut</label>
+            <input type="number" class="form-control" formControlName="tonnagebrut" [(ngModel)]="manifest.tonnagebrut"
+              id="tonnagebrut" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nembretitre">Nombre de titre</label>
+            <input type="number" class="form-control" formControlName="nembretitre" [(ngModel)]="manifest.nembretitre"
+              id="nembretitre" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nembrecolis">Nombre de colis</label>
+            <input type="number" class="form-control" formControlName="nembrecolis" [(ngModel)]="manifest.nembrecolis"
+              id="nembrecolis" required>
+
+          </div>
+
+          <div class="col-md-6">
+            <label for="nembreconteneur">Nombre de contenneurs</label>
+            <input type="number" class="form-control" formControlName="nembreconteneur"
+              [(ngModel)]="manifest.nembreconteneur" id="nembreconteneur" required>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" style="margin: 20px;" class="btn btn-primary" (click)="updateManifest(manifest.id)">valider</button>
+        </div>
+      </form>
+    </div>
+
+
+  </ng-template>
+
+
+
 </body>

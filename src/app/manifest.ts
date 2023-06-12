@@ -1,10 +1,12 @@
+import { ManifestStatus } from "./enums/manifest-status";
+import { User } from "./user";
+
 export class Manifest{
     id!:number;
     bureau!: string ;
     douala!: string ;
     acconsier!: string ;
     numvoyage!: string ;
-    heurearrive!: string ;
     datedepart!: Date ;
     datearrive!: Date ;
     lieudepart!: string ;
@@ -26,4 +28,6 @@ export class Manifest{
     nembretitre!:number;
     nembrecolis!:number;
     nembreconteneur!:number;
+    status!: ManifestStatus;
+    user!: User;
 }
