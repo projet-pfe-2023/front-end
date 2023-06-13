@@ -1,24 +1,29 @@
-<header style="background-color: rgb(0, 162, 255);">
-  <h2 style="padding: 1%;">Administration</h2>
-</header>
+<nav class="navbar navbar-light bg-orange" style="height: 17vh; margin-top: 1px;">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-white" ><h1 style="font-size: 2.5rem;">Administration Consignateur</h1></span>
+  </div>
+</nav>
+
+<div class="container" style="margin-left: 95px;">
+  <div class="row flex-lg-nowrap" style="margin-top: 20px;">
+    <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+      <div class="card p-3" >
+        <div class="e-navlist e-navlist--active-bg">
+          <ul class="nav">
+            <li class="active"><button class="cssbutton"  (click)="accueil()" >Accueil</button></li>
+            <li class="active"><button class="cssbutton"  (click)="openXl(content)">Nouveau manifest</button></li>
+            <li class="active"><button class="cssbutton" (click)="myFunction()" >Charger
+              manifest</button></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+      
+  
 
 <body>
-  <div style="margin: 2%;" class="card">
-    <div class="card-header">
-      <nav class="nav">
-        <button class="btn btn-primary btn-lg" style="margin: 10px;" (click)="accueil()">Accueil</button>
-        <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
-          <button class="btn btn-primary btn-lg" (click)="openXl(content)" style="padding: 10px;">Nouveau manifest
-          </button>
-        </a>
-        <button type="button" style="margin:10px;" (click)="myFunction()" class="btn btn-primary btn-lg">Charger
-          manifest</button>
-      </nav>
-
-
-
-
-    </div>
+  <div style="margin: -1px;" class="card">
     <div class="card-body">
       <div class="e-table">
         <div class="table-responsive table-lg mt-3">
@@ -61,6 +66,8 @@
 
     </div>
   </div>
+
+  
   <ng-template #content let-modal >
     <div class="modal-header">
       <a class="nav-link " routerLink="form-manifest" routerLinkActive="active">
@@ -108,7 +115,7 @@
 
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-right: 50%;">
             <label for="acconsier">Acconsier</label>
             <input type="text" class="form-control" formControlName="acconsier" [(ngModel)]="manifest.acconsier"
               id="acconsier" required>
@@ -150,7 +157,7 @@
 
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-right: 50%;">
             <label for="datearrive">Date de d'arrive</label>
             <input type="date" class="form-control" formControlName="datearrive" [(ngModel)]="manifest.datearrive"
               id="datearrive" required>
@@ -174,7 +181,7 @@
 
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-right: 50%;">
             <label for="adresse">Adresse</label>
             <input type="text" class="form-control" formControlName="adresse" [(ngModel)]="manifest.adresse"
               id="adresse" required>
@@ -299,3 +306,5 @@
 
 
 </body>
+</div>    
+</div>

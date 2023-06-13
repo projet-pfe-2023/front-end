@@ -30,6 +30,8 @@ import { AccueilDouaneComponent } from './accueil-douane/accueil-douane.componen
 import { ConsultationComponent } from './consultation/consultation.component';
 import { AdministrationDouaneComponent } from './administration-douane/administration-douane.component';
 
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+
 
 
 @NgModule({
@@ -51,8 +53,7 @@ import { AdministrationDouaneComponent } from './administration-douane/administr
     CreateUserComponent,
     AccueilDouaneComponent,
     ConsultationComponent,
-    AdministrationDouaneComponent,
-
+    AdministrationDouaneComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +65,25 @@ import { AdministrationDouaneComponent } from './administration-douane/administr
     FormsModule,
     MatPaginatorModule,
     MatTableModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+      },
+    }),
+    
    ],
   providers: [CdkColumnDef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => {
+      
+    },
+    allowedDomains: ['localhost:4200'],
+    
+  };
+}

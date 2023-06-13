@@ -18,6 +18,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import {AccueilDouaneComponent} from './accueil-douane/accueil-douane.component';
 import {ConsultationComponent} from './consultation/consultation.component';
 import {AdministrationDouaneComponent} from './administration-douane/administration-douane.component'; 
+import { ERole } from './enums/erole';
+
 
 
 const routes: Routes = [
@@ -45,7 +47,7 @@ const routes: Routes = [
   children:[
     {path:'consultation',component:ConsultationComponent,canActivate:[AuthGuard]},
   ]},
-  
+
 ];
 
 @NgModule({

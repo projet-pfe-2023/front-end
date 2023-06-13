@@ -1,4 +1,12 @@
-<div class="row">
+<nav class="navbar navbar-light bg-orange" style="height: 17vh; margin-top: 1px;">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-white">
+      <h1 style="font-size: 2.5rem;">Accueil Douane</h1>
+    </span>
+  </div>
+</nav>
+
+<div class="row" style="margin-top: -17px;">
   <div class="col-sm-10">
     <div class="card">
       <h5 class="card-header" style="background-color: #ff7b00;color: #fff;">Douane</h5>
@@ -12,61 +20,56 @@
               <div class="col-sm-6">
 
                 <div class="card">
-                  <div class="card-header" style="background-color: blue;"><h5 style="color: #fff;">Procedure manifest</h5></div>
+                  <div class="card-header" style="background-color: blue;">
+                    <h5 style="color: #fff;">Procedure manifest</h5>
+                  </div>
                   <div class="card-body">
                     <div class="row">
 
                       <div class="col-md-6">
-                        <h4>Demande de modefication</h4>
+                        <h4>Demande de modification</h4>
                       </div>
 
                       <div class="col-md-3">
-                        <h4 style="color: rgb(238, 6, 6);" >MAN03</h4>
+                        <h4 style="color: rgb(238, 6, 6);">hh</h4>
                       </div>
 
-                      <div class="col-md-3">
-                        <h4 style="color: rgb(10, 6, 238);"> hh</h4>
-                      </div>
+
 
                       <div class="col-md-6">
                         <h4>Consultation</h4>
                       </div>
 
                       <div class="col-md-3">
-                        <h4 style="color: rgb(238, 6, 6);" >MAN10</h4>
+                        <h4 style="color: rgb(238, 6, 6);">{{totalManifest}}</h4>
                       </div>
 
-                      <div class="col-md-3">
-                        <h4 style="color: rgb(10, 6, 238);"> hh</h4>
-                      </div>
+
 
                     </div>
 
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
       </div>
-      <div class="card-footer"style="background-color: blue;">
+      <div class="card-footer" style="background-color: blue;">
         <h5 style="text-align: center;color: #fff;">Liste de procedure</h5>
       </div>
     </div>
   </div>
   <div class="col-sm-2">
     <div class="cards">
-  <div class="card text-white bg-orange mb-3" style="max-width: 18rem">
-    <div class="card-header" style="background-color: blue;">bienvenu</div>
-    <div class="card-body">
-      <a href="" class="btn btn-secondary btn-lg active" style="margin: 5px;" role="button" aria-pressed="true" *ngIf="isLoggedIn()" (click)="logout()">Déconnexion</a><br />
-      <a href="administration-douane\consultation" class="btn btn-secondary btn-lg active" style="margin: 5px;" role="button" aria-pressed="true">Administration</a>
-    </div>
-  </div>
+      <div class="card text-white  mb-3" style="max-width: 18rem">
+        <div class="card-header" style="background-color: blue;">bienvenu</div>
+        <div class="card-body">
+          <button type="button" class="btn btn-outline-primary" *ngIf="isLoggedIn()" (click)="logout()">Déconnexion</button><br />
+          <button type="button" class="btn btn-outline-primary" (click)="admin()">Administration</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-

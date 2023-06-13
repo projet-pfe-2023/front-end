@@ -160,11 +160,9 @@ export class AdministrationConsignateurComponent {
           title: 'envoyer demande',
           showConfirmButton: false,
           timer: 1500
-        }).then((result) => {
-          if (result.isConfirmed) {
+        })
             location.reload();
-          }
-        });
+        
         
       },
       error => {
@@ -216,6 +214,7 @@ export class AdministrationConsignateurComponent {
           showConfirmButton: false,
           timer: 1500
         })
+        location.reload();
       },
       (error) => {
         console.error('Failed to update manifest:', error);

@@ -1,67 +1,69 @@
 <body class="d-flex align-items-center">
-<div class="col-lg-6 col-md-8 login-box">
-    <div class=" col-lg-12 form">  
-        <div class=" col-lg-12 head">
-            <h2>s'inscrire</h2>
+    <div class="col-lg-6 col-md-8 login-box">
+        <div class=" col-lg-12 form">
+            <div class=" col-lg-12 head">
+                <h2>s'inscrire</h2>
+            </div>
+            <form #Registerform="ngForm" class="reg-form" [formGroup]="registerform" (submit)="addUser()">
+
+                <label for="lastname"></label>
+                <input type="text" class="form-control" formControlName="lastname" placeholder="nom"
+                    [(ngModel)]="user.lastname" id="lastname" required>
+                <div *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched">
+                    <small *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+
+                <label for="firstname"></label>
+                <input type="text" class="form-control" formControlName="firstname" placeholder="prénom"
+                    [(ngModel)]="user.firstname" id="firstname" required>
+                <div *ngIf="registerform.get('firstname')?.invalid && registerform.get('firstname')?.touched">
+                    <small *ngIf="registerform.get('firstname')?.invalid && registerform.get('firstname')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+
+                <label for="password"></label>
+                <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe"
+                    name="password" [(ngModel)]="user.password" id="password" required>
+                <div *ngIf="registerform.get('password')?.invalid && registerform.get('password')?.touched">
+                    <small *ngIf="registerform.get('password')?.invalid && registerform.get('password')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+
+
+                <label for="email"></label>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" [(ngModel)]="user.email" id="email"
+                    required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
+                <div *ngIf="registerform.get('email')?.invalid && (registerform.get('email')?.dirty ||registerform.get('email')?.touched)">
+                    <small *ngIf="registerform.get('email')?.invalid && registerform.get('email')?.touched"
+                        class="text-danger"> *Leave type is required</small>
+                </div>
+                
+
+                <label for="cin"></label>
+                <input type="text" class="form-control" formControlName="cin" placeholder="CIN" [(ngModel)]="user.cin"
+                    id="cin" required>
+                <div *ngIf="registerform.get('cin')?.invalid && (registerform.get('cin')?.dirty ||registerform.get('cin')?.touched)">
+                    <small *ngIf="registerform.get('cin')?.invalid && registerform.get('cin')?.touched"
+                        class="text-danger">
+                        *Leave type is required</small>
+                </div>
+
+                <label for="partenaire">Partenaire:</label>
+                <select name="partenaire" class="form-control" formControlName="partenaire"
+                    [(ngModel)]="user.partenaire" id="partenaire" required>
+                    <option value="part1">partenaire1</option>
+                    <option value="part2">partenaire2</option>
+                    <option value="part3">partenaire3</option>
+                </select>
+                <div *ngIf="registerform.get('partenaire')?.invalid && registerform.get('partenaire')?.touched">
+                    <small class="text-danger"> *Veuillez sélectionner un partenaire</small>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1%;">Enregistrer</button>
+                    <p class="message" style="text-align: center;"><a routerLink="/login">Back to Login</a></p>
+                </div>
+            </form>
         </div>
-        <form #Registerform="ngForm" class="reg-form" [formGroup]="registerform" (submit)="addUser()">
-
-            <label for="lastname"></label>
-            <input type="text" class="form-control" formControlName="lastname" placeholder="nom" [(ngModel)]="user.lastname" id="lastname"
-                 required>
-            <div *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched">
-                <small *ngIf="registerform.get('lastname')?.invalid && registerform.get('lastname')?.touched"
-                    class="text-danger"> *Leave type is required</small>
-            </div>
-
-            <label for="firstname"></label>
-            <input type="text" class="form-control" formControlName="firstname" placeholder="prénom"  [(ngModel)]="user.firstname"
-                id="firstname" required>
-            <div *ngIf="registerform.get('firstname')?.invalid && registerform.get('firstname')?.touched">
-                <small *ngIf="registerform.get('firstname')?.invalid && registerform.get('firstname')?.touched"
-                    class="text-danger"> *Leave type is required</small>
-            </div>
-
-            <label for="password"></label>
-            <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe" name="password"
-                [(ngModel)]="user.password" id="password" required>
-            <div *ngIf="registerform.get('password')?.invalid && registerform.get('password')?.touched">
-                <small *ngIf="registerform.get('password')?.invalid && registerform.get('password')?.touched"
-                    class="text-danger"> *Leave type is required</small>
-            </div>
-
-
-
-            <label for="email"></label>
-            <input type="email" class="form-control" formControlName="email" placeholder="Email" [(ngModel)]="user.email" id="email"
-                required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
-            <div *ngIf="registerform.get('email')?.invalid && registerform.get('email')?.touched">
-                <small *ngIf="registerform.get('email')?.invalid && registerform.get('email')?.touched"
-                    class="text-danger"> *Leave type is required</small>
-            </div>
-
-            <label for="cin"></label>
-            <input type="text" class="form-control" formControlName="cin" placeholder="CIN"  [(ngModel)]="user.cin" id="cin" required>
-            <div *ngIf="registerform.get('cin')?.invalid && registerform.get('cin')?.touched">
-                <small *ngIf="registerform.get('cin')?.invalid && registerform.get('cin')?.touched" class="text-danger">
-                    *Leave type is required</small>
-            </div>
-
-            <label for="partenaire">Partenaire:</label>
-            <select name="partenaire" class="form-control" formControlName="partenaire" [(ngModel)]="user.partenaire"
-                id="partenaire" required>
-                <option value="part1">partenaire1</option>
-                <option value="part2">partenaire2</option>
-                <option value="part3">partenaire3</option>
-            </select>
-            <div *ngIf="registerform.get('partenaire')?.invalid && registerform.get('partenaire')?.touched">
-                <small class="text-danger"> *Veuillez sélectionner un partenaire</small>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary" style="margin-top: 1%;" >Enregistrer</button>
-                <p class="message" style="text-align: center;"><a routerLink="/login" >Back to Login</a></p>
-            </div>
-        </form>
-     </div>
- </div>
+    </div>
 </body>

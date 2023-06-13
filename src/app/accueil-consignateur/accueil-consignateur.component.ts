@@ -34,4 +34,8 @@ export class AccueilConsignateurComponent implements OnInit{
   logout(): void {
     this.authService.logout();
   }
+
+  admin(){
+    this.router.navigate(['/administration-consignateur']);
+  }
 }

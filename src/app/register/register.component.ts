@@ -16,53 +16,55 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
   user: User = new User();
-  registerform!: FormGroup ;
+  registerform!: FormGroup;
 
-  constructor(private builder: FormBuilder, private authService : AuthService, private router: Router) { }
+  constructor(private builder: FormBuilder, private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.registerform = this.builder.group({
-      identifiant: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
       firstname: this.builder.control('', Validators.compose([Validators.required, Validators.maxLength(20)])),
       lastname: this.builder.control('', Validators.compose([Validators.required, Validators.maxLength(20)])),
       password: this.builder.control(null, [Validators.minLength(6), Validators.required]),
       email: this.builder.control('', Validators.compose([Validators.required, Validators.email])),
       cin: this.builder.control('', Validators.compose([Validators.required, Validators.maxLength(8), Validators.minLength(8)])),
       usager: this.builder.control(''),
-      partenaire: this.builder.control('',Validators.compose([Validators.required])),
-  
+      partenaire: this.builder.control('', Validators.compose([Validators.required])),
+
     });
   }
 
   addUser() {
-    this.authService.addUser(this.user).subscribe((Response) => {
-      console.log(Response);
+    if (this.registerform.valid) {
+      this.authService.addUser(this.user).subscribe((Response) => {
+        console.log(Response);
         this.user = new User();
-        Swal.fire({
-        position: 'top',
-        icon: 'success',
-        confirmButtonColor: '#25377A',
-        title: "Félicitation! Votre inscription est réussie.",
-        showConfirmButton: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/login']);
-        }
-      });
-        
-      },
-      (error) => {
-        console.error(error);
         Swal.fire({
           position: 'top',
           icon: 'success',
           confirmButtonColor: '#25377A',
-          title: " Votre inscription est incorrect.",
+          title: "Félicitation! Votre inscription est réussie.",
           showConfirmButton: true,
-        })
-        
-      });
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/login']);
+          }
+        });
+
+      },
+        (error) => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+           
+          })
+
+        });
+    }
   }
 
+
+ 
 }
 

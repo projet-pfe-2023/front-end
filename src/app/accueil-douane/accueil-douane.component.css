@@ -1,7 +1,19 @@
-.row{
-    padding: 2%;
+.row {
+  padding: 2%;
 }
+
 h5 {
-    text-align: center;
-    margin-top: 8px;
-  }
+  text-align: center;
+  margin-top: 8px;
+}
+
+.bg-orange {
+  background-color: rgb(255, 102, 0);
+
+}
+
+button{
+  min-width: 180px;
+  margin-top: 5px;
+  color: blue;
+}
