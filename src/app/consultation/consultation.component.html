@@ -1,31 +1,51 @@
-<div class="e-table">
-    <div class="table-responsive table-lg mt-3">
-      <table>
-        <thead>
-          <tr>
-            <th>N.Dossier</th>
-            <th class="max-width">N.Voyage</th>
-            <th>Depart</th>
-            <th>Arrivée</th>
-            <th>Date départ</th>
-            <th>Date d'arrivée</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let manifest of manifests" [ngClass]="{'default-row': manifest.status === 'DEFAULT','pending-row': manifest.status === 'PENDING', 'accepted-row': manifest.status === 'ACCEPTED','rejected-row': manifest.status === 'REJECTED'}">
-            <td class="text-nowrap align-middle">{{manifest.id}}</td>
-            <td class="text-nowrap align-middle">{{manifest.numvoyage}}</td>
-            <td class="text-nowrap align-middle">{{manifest.lieudepart}}</td>
-            <td class="text-nowrap align-middle">{{manifest.destination}}</td>
-            <td class="text-nowrap align-middle">{{manifest.datedepart}}</td>
-            <td class="text-nowrap align-middle">{{manifest.datearrive}}</td>
-            <td class="text-nowrap align-middle">
-              <button type="button" class="btn btn-success" *ngIf="manifest.status !== 'DEFAULT'" style="margin-left: 3px; border-radius: 0.9375em;" (click)="acceptManifest(manifest.id)">accepter</button>
-              <button type="button" class="btn btn-danger"  *ngIf="manifest.status !== 'DEFAULT'" style="margin-left: 3px; border-radius: 0.9375em;" (click)="rejectManifest(manifest.id)">reject</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="containers">
+  <div class="row flex-lg-nowrap">
+    <div class="row flex-lg-nowrap">
+      <div class="col mb-3">
+        <div class="e-panel card">
+          <div class="card-body">
+            <div class="card-title">
+              <h1 class="mr-2"><span>Liste de manifeste</span></h1>
+            </div>
+            <div class="e-table">
+              <div class="table-responsive table-lg mt-3">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>N.Dossier</th>
+                      <th class="max-width">N.Voyage</th>
+                      <th>Depart</th>
+                      <th>Arrivée</th>
+                      <th>Date départ</th>
+                      <th>Date d'arrivée</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let manifest of manifests"
+                      [ngClass]="{'default-row': manifest.status === 'DEFAULT','pending-row': manifest.status === 'PENDING', 'accepted-row': manifest.status === 'ACCEPTED','rejected-row': manifest.status === 'REJECTED'}">
+                      <td class="text-nowrap align-middle">{{manifest.id}}</td>
+                      <td class="text-nowrap align-middle">{{manifest.numvoyage}}</td>
+                      <td class="text-nowrap align-middle">{{manifest.lieudepart}}</td>
+                      <td class="text-nowrap align-middle">{{manifest.destination}}</td>
+                      <td class="text-nowrap align-middle">{{manifest.datedepart}}</td>
+                      <td class="text-nowrap align-middle">{{manifest.datearrive}}</td>
+                      <td class="text-nowrap align-middle">
+                        <button type="button"  class="btn btn-success" *ngIf="manifest.status !== 'DEFAULT'"
+                          style="margin-left: 3px; border-radius: 0.9375em;"
+                          (click)="acceptManifest(manifest.id)">accepter</button>
+                        <button type="button"  class="btn btn-danger" *ngIf="manifest.status !== 'DEFAULT'"
+                          style="margin-left: 3px; border-radius: 0.9375em;"
+                          (click)="rejectManifest(manifest.id)">reject</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

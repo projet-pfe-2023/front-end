@@ -15,6 +15,7 @@ export class ConsultationComponent {
   isRequestAccepted: boolean = false;
   isRequestRejected: boolean = true;
   manifestId!: number;
+  
 
   constructor(private manifestService: ManifestService,private modalService: NgbModal,private douaneservice: DouaneService){}
   openXl(content: any) {
@@ -56,6 +57,7 @@ export class ConsultationComponent {
           status: manifest.status,
           user: manifest.user,
           
+          
         }));
         console.log(this.manifests);
       },
@@ -71,12 +73,13 @@ export class ConsultationComponent {
         response => {
           console.log('Manifest accepted:', response);
           this.isRequestAccepted = true; 
-          location.reload();
+          location.reload();      
         },
         error => {
           console.error('Failed to accept manifest:', error);
         }
       );
+      
   }
 
   rejectManifest(manifestId: number): void {
@@ -86,12 +89,14 @@ export class ConsultationComponent {
           console.log('Manifest rejected:', response);
           this.isRequestRejected = false; 
           location.reload();
+        
         },
         error => {
           console.error('Failed to reject manifest:', error);
           
         }
       );
+      
   }
 
 

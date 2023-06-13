@@ -61,10 +61,7 @@ export class GestionUtilisateurComponent implements OnInit {
   }
   
 
-  onCreate(){
-    this.router.navigate(['administration/create-user']);
-  }
-
+  
   DeleteUser(id :number){
     this.userservice.deleteUser(id).subscribe( 
       data => {

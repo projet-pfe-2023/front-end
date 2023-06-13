@@ -25,4 +25,21 @@ export class AdministrationComponent  {
   logout(): void {
     this.authService.logout();
   }
+
+  utilisateur(){
+    this.router.navigate(['/administration/gestion-utilisateur/:id']);
+  }
+
+  role(){
+    this.router.navigate(['/administration/gestion-role']);
+  }
+
+  accueil(){
+    this.router.navigate(['/accueil']);
+  }
+
+  
+  onCreate(){
+    this.router.navigate(['administration/create-user']);
+  }
 } 

@@ -26,3 +26,10 @@ th {
 .rejected-row {
   background-color: red;
 }
+h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+}

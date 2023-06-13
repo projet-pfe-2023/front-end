@@ -16,7 +16,7 @@ import { error } from 'jquery';
 })
 export class GestionRoleComponent implements OnInit {
   content: any;
-  roles = ['USER', 'ADMIN'];
+  roles = ['USER', 'ADMIN' ,'DOUANE'];
   newRole = '';
   id!:number;
  

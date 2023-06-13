@@ -17,9 +17,10 @@ export class AdministrationConsignateurComponent {
   manifest: Manifest = new Manifest();
   isRequestAccepted: boolean = false;
   manifestId!: number;
-  requestBody!: Manifest;
+  updatedManifest!: Manifest;
   generalform!: FormGroup;
- 
+  responseMessage!: string;
+  id!: number;
   
 
   constructor(private modalService: NgbModal, private manifestService: ManifestService,private router:Router,private builder: FormBuilder) { }
@@ -145,10 +146,37 @@ export class AdministrationConsignateurComponent {
     this.router.navigate(['/accueil-consignateur'])
   }
 
-  updateManifest(manifestId: number): void {
-    
-    const updatedManifest: Manifest = {
-      id: manifestId,
+  
+  
+
+  demandeModification(manifestId: number): void {
+    this.manifestService.demandeModification(manifestId).subscribe(
+      response => {
+        console.log('Manifest pending:', response);
+        this.isRequestAccepted = true; 
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'envoyer demande',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+        
+      },
+      error => {
+        console.error('Failed to pending manifest:', error);
+      }
+    );
+
+  }
+
+  updateManifest(id: number): void {
+    const requestBody: Manifest = {
+      id: this.manifest.id,
       bureau: this.manifest.bureau,
       douala: this.manifest.douala,
       acconsier: this.manifest.acconsier,
@@ -178,55 +206,24 @@ export class AdministrationConsignateurComponent {
       user:this.manifest.user,
       
     };
-
-    this.manifestService.updateManifest(manifestId, updatedManifest)
-    .subscribe(
-      updatedManifest => {
-        console.log('Manifest updated:', updatedManifest);
+    this.manifestService.updateManifest(id, requestBody).subscribe(
+      (requestBody) => {
+        console.log('Manifest updated successfully:', requestBody);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           title: 'The change has been successful',
           showConfirmButton: false,
           timer: 1500
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate(['/administration-consignateur']);
-          }
-        });
+        })
       },
-      error => {
-        console.error('Error updating manifest:', error);
+      (error) => {
+        console.error('Failed to update manifest:', error);
+       
       }
     );
-  }
-
-  demandeModification(manifestId: number): void {
-    this.manifestService.demandeModification(manifestId).subscribe(
-      response => {
-        console.log('Manifest pending:', response);
-        this.isRequestAccepted = true; 
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'envoyer demande',
-          showConfirmButton: false,
-          timer: 1500
-        }).then((result) => {
-          if (result.isConfirmed) {
-            location.reload();
-          }
-        });
-        
-      },
-      error => {
-        console.error('Failed to pending manifest:', error);
-      }
-    );
-
   }
 
  
 
 }
-

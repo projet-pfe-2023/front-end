@@ -1,17 +1,28 @@
-<header ><h2>Administration</h2></header>
-<body>
-  <div style="margin: 2%;" class="card">
-    <div class="card-header">
-       <nav class="nav">
-        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" href="accueil">Accueil</a>
-        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="gestion-utilisateur/:id" routerLinkActive="active" >Gestion des utilisateur</a>
-        <a class="nav-link btn btn-primary btn-sm active" style="margin: 10px;" role="button" aria-pressed="true" routerLink="gestion-role" routerLinkActive="active" >Gestion des roles des utilisateurs</a>
-        <button class="btn btn-primary btn-sm" style="margin: 10px;" *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button>
-      </nav>
-    </div>
-    <div class="card-body">
-           <router-outlet></router-outlet>
-    </div>
+<nav class="navbar navbar-light bg-orange" style="height: 13vh; margin-top: 1px;">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-white" ><h1 style="font-size: 3rem;">Administration</h1></span>
   </div>
-   
-</body>
+</nav>
+
+
+<div class="container">
+  <div class="row flex-lg-nowrap" style="margin-top: 30px;">
+    <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+      <div class="card p-3">
+        <div class="e-navlist e-navlist--active-bg">
+          <ul class="nav">
+            <li class="active"><button class="button"  (click)="onCreate()">Ajouter</button></li>
+            <li class="active"><button class="button"  (click)="accueil()">Acceuil</button></li>
+            <li class="active"><button class="button"  (click)="utilisateur()">Utilisateurs</button></li>
+            <li class="active"><button class="button"  (click)="role()">Roles</button></li>
+            <li class="active"><button class="button"  *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="card-body">
+            <router-outlet></router-outlet>
+      </div>
+  </div>    
+</div>

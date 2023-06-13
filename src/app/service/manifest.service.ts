@@ -49,15 +49,6 @@ export class ManifestService {
   }
 
 
-
-
-  updateManifest(manifestId: number, requestBody: Manifest): Observable<Manifest> {
-    const url = `${this.apiURL}/manifests/${manifestId}`;
-    return this.httpClient.put<Manifest>(url, requestBody);
-  }
-
-
-
   demandeModification(manifestId: number): Observable<Manifest> {
     const url = `${this.apiURL}/demande/${manifestId}/Modifier`;
     return this.httpClient.put<Manifest>(url, {});
@@ -69,6 +60,21 @@ export class ManifestService {
 
   getTotalManifestByStatus() {
     return this.httpClient.get<number>(this.apiURL + "/totalmanifest");
+  }
+
+
+  updateManifest(id: number, updatedManifest: Manifest): Observable<Manifest> {
+
+    const token = localStorage.getItem('token');
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    const url = `${this.apiURL}/${id}`;
+    return this.httpClient.put<Manifest>(url, updatedManifest, httpOptions);
   }
 
 }

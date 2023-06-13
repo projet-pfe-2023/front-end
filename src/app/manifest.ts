@@ -30,4 +30,5 @@ export class Manifest{
     nembreconteneur!:number;
     status!: ManifestStatus;
     user!: User;
+    
 }

@@ -1,16 +1,26 @@
-<header style="background-color: rgb(0, 162, 255);"><h2 style="padding: 1%;">Administration Douane</h2></header>
-<body>
-    <div style="margin: 2%;" class="card">
-      <div class="card-header">
-         <nav class="nav">
-          <button class="btn btn-primary btn-lg" style="margin: 10px;" (click)="douane()">Accueil</button>
-          <button class="btn btn-primary btn-lg" style="margin: 10px;" (click)="consultation()">Consulter</button>
-          <button class="btn btn-primary btn-lg" style="margin: 10px;" *ngIf="isLoggedIn()" (click)="logout()">Déconnexion</button>
-        </nav>
-      </div>
-      <div class="card-body">
-             <router-outlet></router-outlet>
+<nav class="navbar navbar-light bg-orange" style="height: 13vh; margin-top: 1px;">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-white" ><h1 style="font-size: 3rem;">Administration Douane</h1></span>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row flex-lg-nowrap" style="margin-top: 30px;">
+    <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+      <div class="card p-3">
+        <div class="e-navlist e-navlist--active-bg">
+          <ul class="nav">
+            <li class="active"><button class="button"  (click)="douane()">Accueil</button></li>
+            <li class="active"><button class="button"  (click)="consultation()">Consulter</button></li>
+            <li class="active"><button class="button"  *ngIf="isLoggedIn()" (click)="logout()">Deconnexion</button></li>
+
+          </ul>
+        </div>
       </div>
     </div>
-     
-  </body>
+      <div class="card-body">
+            <router-outlet></router-outlet>
+      </div>
+  </div>    
+</div>
